@@ -1,6 +1,6 @@
 import Reveal from "../../common/Reveal";
 import SectionBadge from "../../common/SectionBadge";
-import styles from "./WhyChooseAI.module.css";
+import styles from "./Challenges.module.css";
 
 const ICONS = {
   estimation: (
@@ -37,7 +37,7 @@ const ICONS = {
 };
 
 /** Why Choose AI — CSS sticky stacked cards (no GSAP pin). */
-export default function WhyChooseAI({ content, onExplore, ctaLabel = "Explore your Workflow" }) {
+export default function Challenges({ content, onExplore, ctaLabel = "Explore your Workflow" }) {
   const {
     badge,
     titleBefore,

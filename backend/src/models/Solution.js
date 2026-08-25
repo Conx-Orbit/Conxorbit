@@ -84,6 +84,12 @@ const solutionSchema = new mongoose.Schema(
       },
     ],
 
+    mockupType: {
+      type: String,
+      enum: ["web", "mobile"],
+      default: "web",
+    },
+
     hero: {
       titleBefore: {
         type: String,

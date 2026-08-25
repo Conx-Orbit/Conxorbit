@@ -28,6 +28,7 @@ const EMPTY = {
   category: "other",
   tags: [],
   trades: [],
+  mockupType: "web",
 
   hero: {
     titleBefore: "",
@@ -206,6 +207,7 @@ export default function Solution() {
   const [allSolutions, setAllSolutions] = useState([]);
 
   const [error, setError] = useState("");
+  const [notice, setNotice] = useState("");
   const [saving, setSaving] = useState(false);
 
 
@@ -304,6 +306,7 @@ export default function Solution() {
 
     setSaving(true);
     setError("");
+    setNotice("");
 
     try {
       const payload = {
@@ -321,12 +324,14 @@ export default function Solution() {
       delete payload.updatedAt;
 
       if (isNew) {
-        const created = await api.admin.solutions.create(
+        await api.admin.solutions.create(
           token,
           payload
         );
-
-        navigate(`/admin/solutions/${created._id}`);
+        setNotice("Solution created successfully.");
+        window.setTimeout(() => {
+          navigate("/admin/solutions");
+        }, 900);
       } else {
         await api.admin.solutions.update(
           token,
@@ -632,7 +637,11 @@ export default function Solution() {
             type="submit"
             disabled={saving}
           >
-            {saving ? "Saving…" : "Save Solution"}
+            {saving
+              ? "Saving…"
+              : isNew
+                ? "Create Solution"
+                : "Save Solution"}
           </button>
         </div>
       </div>
@@ -642,6 +651,12 @@ export default function Solution() {
         <p className={styles.error}>
           {error}
         </p>
+      ) : null}
+
+      {notice ? (
+        <div className={styles.noticeToast} role="status" aria-live="polite">
+          {notice}
+        </div>
       ) : null}
 
 
@@ -764,6 +779,18 @@ export default function Solution() {
               </label>
             ))}
           </div>
+        </label>
+
+
+        <label className={styles.field}>
+          <span>Mockup Type</span>
+          <select
+            value={form.mockupType}
+            onChange={(e) => setField("mockupType", e.target.value)}
+          >
+            <option value="web">Web</option>
+            <option value="mobile">Mobile</option>
+          </select>
         </label>
 
 

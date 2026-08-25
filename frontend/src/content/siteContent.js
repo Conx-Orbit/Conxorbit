@@ -2,8 +2,8 @@ export const site = {
   name: "ConX Orbit",
   tagline: "Custom software and AI for construction and façade teams",
   email: "Founder@conxorbit.com",
-  phone: "+971 00 000 0000",
-  whatsapp: "+971000000000",
+  phone: "+92-303-7342110",
+  whatsapp: "+92-303-7342110",
   whatsappLabel: "WhatsApp",
   linkedin: "https://www.linkedin.com/company/conxorbit",
 };
@@ -61,12 +61,12 @@ export const homeContent = {
   },
   hero: {
     eyebrow: "Built for Façade & Construction Teams",
-    title: "Intelligent Systems for the Façade & Construction Industry",
-    body: "We design AI-powered platforms, automation, and custom software that streamline construction workflows—from drawings and estimation to site operations and project delivery.",
+    title: "Software Built Around How Your Team Actually Works",
+    body: "From drawings to site delivery — we build around your actual workflow, not shelf software forced to fit. You see it working before you commit to the rest.",
     primaryCta: { label: "Book a Discovery Call", href: "/book-discovery" },
     secondaryCta: { label: "Explore Solutions", href: "/solutions" },
     statCards: [
-      { label: "Workflow-First Approach" },
+      { label: "Ground-Truth Build" },
       { label: "Custom-Built Systems" },
       { label: "Built for Façade Teams" },
     ],
@@ -76,15 +76,15 @@ export const homeContent = {
     title: "Built for the Specialists Behind Modern Buildings.",
     body: "From façade engineering to wider construction operations, we build intelligent systems around the way these teams work.",
   },
-  whyChooseAi: {
+  challenges: {
     badge: "Where We Create Impact",
-    titleBefore: "Construction moves fast. ",
-    titleHighlight: "Your workflows should too",
+    titleBefore: "Every Manual Step Costs You  ",
+    titleHighlight: "Time You Can't Get Back",
     titleAfter: ".",
     body: "Every project depends on hundreds of repetitive decisions—from reviewing drawings and preparing quotations to tracking fabrication and documenting site progress. We build intelligent systems that remove friction from these everyday workflows.",
     ctaLabel: "Explore your Workflow",
     closingLine:
-      "Every workflow is different. That's why every solution we build starts with understanding how your team works.",
+      "Every workflow is different. That's why every build starts as a Ground-Truth Build — we study how your team actually works before we write a line of code.",
     cards: [
       {
         icon: "estimation",
@@ -177,7 +177,7 @@ export const homeContent = {
     titleBefore: "Systems Built for Real ",
     titleHighlight: "Construction Workflows",
     titleAfter: ".",
-    body: "Explore a selection of client systems and workflow solutions designed to streamline operations, reduce manual work, and improve the way construction teams deliver projects.",
+    body: "A look at what we've actually built — real systems solving real workflow problems",
     viewAll: { label: "View All Solutions", href: "/solutions" },
     cards: [
       {

@@ -12,16 +12,16 @@ export default function SolutionHowItWorks({ content }) {
 
   useEffect(() => {
     if (!steps.length) return undefined;
-    setActive(Math.min(2, steps.length - 1));
+    setActive(0);
   }, [steps.length]);
 
   useEffect(() => {
-    if (reduced || steps.length < 2) return undefined;
-    const id = window.setInterval(() => {
-      setActive((prev) => (prev + 1) % steps.length);
+    if (reduced || steps.length < 2 || active >= steps.length - 1) return undefined;
+    const id = window.setTimeout(() => {
+      setActive((prev) => Math.min(prev + 1, steps.length - 1));
     }, 2800);
-    return () => window.clearInterval(id);
-  }, [reduced, steps.length]);
+    return () => window.clearTimeout(id);
+  }, [active, reduced, steps.length]);
 
   if (!content) return null;
 
@@ -53,7 +53,12 @@ export default function SolutionHowItWorks({ content }) {
           />
         </div>
 
-        <ol className={styles.stages}>
+        <ol
+          className={styles.stages}
+          style={{
+            gridTemplateColumns: `repeat(${Math.max(steps.length, 1)}, minmax(0, 1fr))`,
+          }}
+        >
           {steps.map((step, index) => {
             const on = index <= active;
             return (

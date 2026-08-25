@@ -100,6 +100,25 @@
   min-width: 0;
 }
 
+.mobileMockup {
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(8, 18, 16, 0.96);
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.4);
+  padding: 16px;
+  display: grid;
+  place-items: center;
+}
+
+.mobileMockup img {
+  display: block;
+  max-height: 560px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 14px;
+}
+
 .browser {
   border-radius: 14px;
   overflow: hidden;

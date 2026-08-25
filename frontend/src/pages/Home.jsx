@@ -3,7 +3,7 @@ import SEO from "../components/common/SEO";
 import { CTABand } from "../components/common/PageHero";
 import Hero from "../components/hero/Hero/Hero";
 import TradeShowcase from "../components/hero/TradeShowcase/TradeShowcase";
-import WhyChooseAI from "../components/home/WhyChooseAI/WhyChooseAI";
+import Challenges from "../components/home/Challenges/Challenges";
 import ServicesTabs from "../components/home/ServicesTabs/ServicesTabs";
 import FeaturedSolutions from "../components/home/FeaturedSolutions/FeaturedSolutions";
 import FrameworkStoryline from "../components/home/FrameworkStoryline/FrameworkStoryline";
@@ -25,7 +25,7 @@ export default function Home() {
     meta,
     hero,
     tradeShowcase,
-    whyChooseAi,
+    challenges,
     services,
     featuredSolutions,
     framework,
@@ -63,10 +63,10 @@ export default function Home() {
       <SEO title={meta.title} description={meta.description} path="/" />
       <Hero content={hero} />
       <TradeShowcase content={tradeShowcase} />
-      <WhyChooseAI
-        content={whyChooseAi}
+      <Challenges
+        content={challenges}
         onExplore={openWorkflow}
-        ctaLabel={whyChooseAi.ctaLabel}
+        ctaLabel={Challenges.ctaLabel}
       />
       <ServicesTabs content={services} />
       <FeaturedSolutions content={featuredSolutions} />

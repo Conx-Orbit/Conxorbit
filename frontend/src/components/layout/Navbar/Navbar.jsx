@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { navLinks } from "../../../content/siteContent";
+import { api } from "../../../api/client";
 import brandLogo from "../../../assets/images/Logo.png";
 import { scrollToTop } from "../../../utils/scrollToTop";
 import styles from "./Navbar.module.css";
@@ -9,8 +10,48 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [openMenu, setOpenMenu] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [solutionChildren, setSolutionChildren] = useState([]);
   const menuRefs = useRef({});
   const location = useLocation();
+
+  useEffect(() => {
+    let alive = true;
+
+    api
+      .getSolutions()
+      .then((rows) => {
+        if (!alive) return;
+        const children = (rows || [])
+          .map((row) => ({
+            label: row.name,
+            href: `/solutions/${row.slug}`,
+          }))
+          .filter((row) => row.label && row.href)
+          .sort((a, b) => a.label.localeCompare(b.label));
+
+        setSolutionChildren([
+          ...children,
+          { label: "View All Solutions", href: "/solutions", emphasis: true },
+        ]);
+      })
+      .catch(() => {
+        if (!alive) return;
+        setSolutionChildren([{ label: "View All Solutions", href: "/solutions", emphasis: true }]);
+      });
+
+    return () => {
+      alive = false;
+    };
+  }, []);
+
+  const effectiveLinks = navLinks.map((link) =>
+    link.label === "Solutions"
+      ? {
+          ...link,
+          children: solutionChildren,
+        }
+      : link
+  );
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -68,7 +109,7 @@ export default function Navbar() {
       </button>
 
       <nav className={styles.nav} aria-label="Primary navigation">
-        {navLinks.map((link) =>
+        {effectiveLinks.map((link) =>
           link.children ? (
             <div
               key={link.label}

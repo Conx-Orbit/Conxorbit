@@ -5,7 +5,7 @@ import usePrefersReducedMotion from "../../hooks/usePrefersReducedMotion";
 import styles from "./SolutionDetailHero.module.css";
 
 export default function SolutionDetailHero({ solution }) {
-  const { name, image, hero, shortDescription } = solution;
+  const { name, image, hero, shortDescription, mockupType } = solution;
   const {
     titleBefore,
     titleHighlight,
@@ -48,17 +48,23 @@ export default function SolutionDetailHero({ solution }) {
         </div>
       </div>
       <div className={styles.media}>
-        <div className={`${styles.browser} interactiveCard`}>
-          <div className={styles.chrome} aria-hidden="true">
-            <span className={styles.dot} />
-            <span className={styles.dot} />
-            <span className={styles.dot} />
-            <span className={styles.url}>{name.toLowerCase().replace(/\s+/g, "")}.app</span>
+        {mockupType === "mobile" ? (
+          <div className={`${styles.mobileMockup} interactiveCard`}>
+            <img src={heroImage} alt={`${name} mockup`} loading="eager" />
           </div>
-          <div className={`${styles.viewport} mediaZoom`}>
-            <img src={heroImage} alt="" loading="eager" />
+        ) : (
+          <div className={`${styles.browser} interactiveCard`}>
+            <div className={styles.chrome} aria-hidden="true">
+              <span className={styles.dot} />
+              <span className={styles.dot} />
+              <span className={styles.dot} />
+              <span className={styles.url}>{name.toLowerCase().replace(/\s+/g, "")}.app</span>
+            </div>
+            <div className={`${styles.viewport} mediaZoom`}>
+              <img src={heroImage} alt="" loading="eager" />
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </Reveal>
   );

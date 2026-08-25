@@ -50,6 +50,7 @@ function parseBody(raw = {}) {
     category: body.category || "client-system",
     tags: parseList(body.tags),
     trades: normalizeTrades(body.trades),
+    mockupType: body.mockupType === "mobile" ? "mobile" : "web",
     hero: {
       titleBefore: String(body.hero?.titleBefore || "").trim(),
       titleHighlight: String(body.hero?.titleHighlight || "").trim(),

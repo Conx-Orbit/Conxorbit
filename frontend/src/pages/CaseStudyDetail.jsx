@@ -12,7 +12,6 @@ import styles from "./CaseStudyDetail.module.css";
 export default function CaseStudyDetail() {
   const { slug } = useParams();
   const [study, setStudy] = useState(null);
-  const [relatedSolution, setRelatedSolution] = useState(null);
   const [status, setStatus] = useState("loading");
 
   useEffect(() => {
@@ -20,25 +19,10 @@ export default function CaseStudyDetail() {
     setStatus("loading");
     api
       .getCaseStudy(slug)
-      .then(async (item) => {
+      .then((item) => {
         if (!alive) return;
         setStudy(item);
-        let related = null;
-        if (item.relatedSolutionId) {
-          try {
-            const solutions = await api.getSolutions("?listing=all");
-            related =
-              solutions.find((row) => String(row._id) === String(item.relatedSolutionId)) ||
-              solutions.find((row) => row.slug === item.relatedSolutionId) ||
-              null;
-          } catch {
-            related = null;
-          }
-        }
-        if (alive) {
-          setRelatedSolution(related);
-          setStatus("ok");
-        }
+        setStatus("ok");
       })
       .catch(() => {
         if (!alive) return;
@@ -62,17 +46,17 @@ export default function CaseStudyDetail() {
     return <Navigate to="/portfolio" replace />;
   }
 
-  const solutionName = relatedSolution?.name || study.title;
-  const solutionHref = relatedSolution?.slug
-    ? `/solutions/${relatedSolution.slug}`
+  const solutionName = study.relatedSolution?.name || study.solutionName || study.title;
+  const solutionHref = study.relatedSolution?.slug
+    ? `/solutions/${study.relatedSolution.slug}`
     : "/solutions";
   const seoTitle = `${solutionName} — Case Study | ConX Orbit`;
   const seoDescription = study.shortDescription || "";
 
   const studyForHero = {
     ...study,
-    heroImageUrl: mediaUrl(study.heroImageUrl),
-    mockupImageUrl: mediaUrl(study.mockupImageUrl),
+    heroImageUrl: mediaUrl(study.heroImageUrl || study.heroImage?.url),
+    mockupImageUrl: mediaUrl(study.mockupImageUrl || study.heroImage?.url),
   };
 
   return (
@@ -81,27 +65,12 @@ export default function CaseStudyDetail() {
       <CaseStudyHero study={studyForHero} solutionName={solutionName} />
       <CaseStudyProblem problem={study.problem} problemPoints={study.problemPoints} />
       <CaseStudySolution solution={study.solution} solutionPoints={study.solutionPoints} />
-      {(study.supportingImageUrl || study.clientName || study.industry) && (
-        <div className={styles.body}>
-          {study.supportingImageUrl ? (
-            <img
-              className={styles.supportImage}
-              src={mediaUrl(study.supportingImageUrl)}
-              alt=""
-              loading="lazy"
-            />
-          ) : null}
-          {(study.clientName || study.industry || study.trade) && (
-            <p className={styles.metaLine}>
-              {[study.clientName, study.industry, study.trade].filter(Boolean).join(" · ")}
-            </p>
-          )}
-        </div>
-      )}
       <CaseStudyCta
         content={{
-          title: `See ${solutionName} in more detail.`,
-          body: "Explore the full solution, its capabilities and the workflow it was designed around.",
+          title: study.cta?.title || `See ${solutionName} in more detail.`,
+          body:
+            study.cta?.description ||
+            "Explore the full solution, its capabilities and the workflow it was designed around.",
           primary: { label: "View Solution", href: solutionHref },
           secondary: { label: "Explore More Case Studies", href: "/portfolio" },
         }}

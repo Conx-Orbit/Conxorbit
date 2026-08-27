@@ -1,4 +1,5 @@
 const Solution = require("../models/Solution");
+const CaseStudy = require("../models/CaseStudy");
 const { CLOUDINARY_FOLDERS } = require("../config/folders");
 const { asMedia, replaceMedia, syncReplacedMedia, clearMedia } = require("../utils/media");
 
@@ -137,6 +138,32 @@ function parseBody(raw = {}) {
   };
 }
 
+async function publishedCaseStudyMap(solutionIds) {
+  const ids = (solutionIds || []).filter(Boolean);
+  if (!ids.length) return new Map();
+  const studies = await CaseStudy.find({
+    published: true,
+    relatedSolutionId: { $in: ids },
+  })
+    .select("slug title relatedSolutionId featured sortOrder")
+    .sort({ featured: -1, sortOrder: 1, title: 1 })
+    .lean();
+  const map = new Map();
+  studies.forEach((study) => {
+    const key = String(study.relatedSolutionId || "");
+    if (!key || map.has(key)) return;
+    map.set(key, { slug: study.slug, title: study.title || "" });
+  });
+  return map;
+}
+
+function withPublishedCaseStudy(doc, map) {
+  const pub = toPublic(doc);
+  const key = String(doc._id || pub.id || "");
+  pub.publishedCaseStudy = (key && map.get(key)) || null;
+  return pub;
+}
+
 /** Shape used by the public website */
 function toPublic(doc) {
   const row = doc.toObject ? doc.toObject() : doc;
@@ -223,7 +250,8 @@ async function listPublic(req, res) {
     }
 
     const rows = await Solution.find(query).sort({ sortOrder: 1, name: 1 }).lean();
-    return res.json(rows.map(toPublic));
+    const caseMap = await publishedCaseStudyMap(rows.map((row) => row._id));
+    return res.json(rows.map((row) => withPublishedCaseStudy(row, caseMap)));
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
@@ -235,7 +263,8 @@ async function getPublicBySlug(req, res) {
     if (!item || item.showOnListing === false) {
       return res.status(404).json({ message: "Not found" });
     }
-    const pub = toPublic(item);
+    const caseMap = await publishedCaseStudyMap([item._id]);
+    const pub = withPublishedCaseStudy(item, caseMap);
     if (item.relatedSolutionIds?.length) {
       const related = await Solution.find({
         _id: { $in: item.relatedSolutionIds },

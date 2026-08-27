@@ -6,7 +6,7 @@ import AdminSolutionForm from "./AdminSolutionForm";
 import AdminCaseStudies from "./AdminCaseStudies";
 import AdminTeam from "./AdminTeam";
 import AdminOffers from "./AdminOffers";
-import AdminPages from "./AdminPages";
+import AdminServiceFeatured from "./AdminServiceFeatured";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import styles from "./admin.module.css";
 
@@ -24,6 +24,12 @@ function Shell() {
           </NavLink>
           <NavLink
             className={({ isActive }) => (isActive ? styles.navActive : undefined)}
+            to="/admin/service-featured"
+          >
+            Service Featured Solutions
+          </NavLink>
+          <NavLink
+            className={({ isActive }) => (isActive ? styles.navActive : undefined)}
             to="/admin/case-studies"
           >
             Case Studies
@@ -33,12 +39,6 @@ function Shell() {
           </NavLink>
           <NavLink className={({ isActive }) => (isActive ? styles.navActive : undefined)} to="/admin/offers">
             Offers
-          </NavLink>
-          <NavLink
-            className={({ isActive }) => (isActive ? styles.navActive : undefined)}
-            to="/admin/pages/solutionsListing"
-          >
-            Pages
           </NavLink>
         </nav>
         <div className={styles.sideFoot}>
@@ -64,11 +64,10 @@ function AdminRoutes() {
         <Route index element={<Navigate to="solutions" replace />} />
         <Route path="solutions" element={<AdminSolutionsList />} />
         <Route path="solutions/:id" element={<AdminSolutionForm />} />
+        <Route path="service-featured" element={<AdminServiceFeatured />} />
         <Route path="case-studies" element={<AdminCaseStudies />} />
         <Route path="team" element={<AdminTeam />} />
         <Route path="offers" element={<AdminOffers />} />
-        <Route path="pages" element={<Navigate to="solutionsListing" replace />} />
-        <Route path="pages/:key" element={<AdminPages />} />
       </Route>
     </Routes>
   );

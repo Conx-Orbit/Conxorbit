@@ -40,12 +40,20 @@ export default function PortfolioProductGrid({ content }) {
                   </span>
                 ))}
               </div>
-              {card.href ? (
-                <Link className={`${styles.cta} btnMotion`} to={card.href}>
-                  <span>Learn More</span>
-                  <span aria-hidden="true">→</span>
-                </Link>
-              ) : null}
+              <div className={styles.ctas}>
+                {card.href ? (
+                  <Link className={`${styles.cta} btnMotion`} to={card.href}>
+                    <span>Learn More</span>
+                    <span aria-hidden="true">→</span>
+                  </Link>
+                ) : null}
+                {card.caseStudyHref ? (
+                  <Link className={`${styles.cta} btnMotion`} to={card.caseStudyHref}>
+                    <span>View Case Study</span>
+                    <span aria-hidden="true">→</span>
+                  </Link>
+                ) : null}
+              </div>
             </article>
           ))}
         </div>

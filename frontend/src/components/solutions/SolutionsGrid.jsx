@@ -14,29 +14,39 @@ export default function SolutionsGrid({ items = [] }) {
   return (
     <Reveal as="div" className={styles.wrap}>
       <div className={styles.grid}>
-        {items.map((item) => (
-          <Link
-            key={item.slug}
-            to={`/solutions/${item.slug}`}
-            className={`${styles.card} interactiveCard cardReveal`}
-            aria-label={`View ${item.name} solution`}
-          >
-            <span className={styles.badge}>{item.badge}</span>
-            <div className={`${styles.mockup} mediaZoom`}>
-              <img src={item.image} alt="" loading="lazy" />
-            </div>
-            <h2>{item.name}</h2>
-            <p className={styles.description}>{item.description}</p>
-            <div className={styles.tags}>
-              {(item.tags || item.categories || []).map((tag) => (
-                <span key={tag} className={styles.tag}>
-                  {tag}
-                </span>
-              ))}
-            </div>
-            <span className={styles.learnMore}>Learn More</span>
-          </Link>
-        ))}
+        {items.map((item) => {
+          const caseStudySlug = item.publishedCaseStudy?.slug;
+          return (
+            <article
+              key={item.slug}
+              className={`${styles.card} interactiveCard cardReveal`}
+            >
+              <span className={styles.badge}>{item.badge}</span>
+              <div className={`${styles.mockup} mediaZoom`}>
+                <img src={item.image} alt="" loading="lazy" />
+              </div>
+              <h2>{item.name}</h2>
+              <p className={styles.description}>{item.description}</p>
+              <div className={styles.tags}>
+                {(item.tags || item.categories || []).map((tag) => (
+                  <span key={tag} className={styles.tag}>
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <div className={styles.actions}>
+                <Link className={styles.learnMore} to={`/solutions/${item.slug}`}>
+                  Learn More
+                </Link>
+                {caseStudySlug ? (
+                  <Link className={styles.learnMore} to={`/case-studies/${caseStudySlug}`}>
+                    View Case Study
+                  </Link>
+                ) : null}
+              </div>
+            </article>
+          );
+        })}
       </div>
     </Reveal>
   );

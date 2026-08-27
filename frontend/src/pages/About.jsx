@@ -492,19 +492,15 @@ function ValuesSection({ values }) {
 export default function About() {
   const { meta, glowHero, offer, story, team, values } = aboutContent;
   const [teamMembers, setTeamMembers] = useState([]);
-  const [teamTitle, setTeamTitle] = useState(team.title);
   const [teamError, setTeamError] = useState("");
 
   useEffect(() => {
     let alive = true;
-    Promise.all([
-      api.getTeam(),
-      api.getPageContent("aboutTeam").catch(() => null),
-    ])
-      .then(([rows, chrome]) => {
+    api
+      .getTeam()
+      .then((rows) => {
         if (!alive) return;
         setTeamMembers(rows || []);
-        if (chrome?.title) setTeamTitle(chrome.title);
         setTeamError("");
       })
       .catch((err) => {
@@ -524,7 +520,7 @@ export default function About() {
       <OfferSection offer={offer} />
       <StorySection story={story} />
       {teamError ? <p style={{ textAlign: "center", padding: 24 }}>{teamError}</p> : null}
-      <TeamSection team={{ ...team, title: teamTitle, members: teamMembers }} />
+      <TeamSection team={{ ...team, members: teamMembers }} />
       <ValuesSection values={values} />
       <CTABand
         title="Want to work with us?"

@@ -28,8 +28,23 @@ function normalizePoints(problemPoints = []) {
 }
 
 export default function CaseStudyProblem({ problem, problemPoints = [] }) {
-  const { title, body } = splitProblem(problem);
-  const points = normalizePoints(problemPoints);
+  const isObject = problem && typeof problem === "object" && !Array.isArray(problem);
+  let title = "";
+  let body = "";
+  if (isObject) {
+    title = String(problem.title || "").trim();
+    body = String(problem.description || problem.body || "").trim();
+    if (!title && body) {
+      const split = splitProblem(body);
+      title = split.title;
+      body = split.body;
+    }
+  } else {
+    const split = splitProblem(problem);
+    title = split.title;
+    body = split.body;
+  }
+  const points = normalizePoints(problem?.cards || problem?.points || problemPoints);
 
   if (!title && !body && !points.length) return null;
 

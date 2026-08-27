@@ -23,8 +23,8 @@ npm start
 ## Data locations
 
 - **Primary database:** MongoDB (`MONGODB_URI` in `backend/.env`)
-- Solutions, case studies, team, offers, admin login → Mongo
-- Page chrome (listing/portfolio section titles): still `backend/data/db.json` (LowDB `pageContent`)
+- Solutions, case studies, team, offers, service featured config, admin login → Mongo
+- Static page copy (heroes, CTAs, service pages) → `frontend/src/content`
 
 Re-seed Mongo (wipes solutions / cases / team / offers / admin and reloads):  
 `cd backend && npm run seed`  
@@ -58,7 +58,7 @@ Folders (under root **Conx-orbit**):
 - Case studies (hero mockup image)
 - Team (profile picture)
 - Offers (optional image; public site UI not wired yet)
-- Pages → listing/portfolio chrome (LowDB)
+- Service Featured Solutions
 
 ## Public site
 

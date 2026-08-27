@@ -72,9 +72,8 @@ function ProductMockup({ imageUrl }) {
 
 export default function CaseStudyHero({ study, solutionName }) {
   if (!study) return null;
-  const category = study.category || "Client System";
-  const name = solutionName || study.title;
-  const heading = study.projectType || "";
+  const name = solutionName || study.solutionName || study.title;
+  const heading = study.title && study.title !== name ? study.title : "";
   const summary = study.shortDescription || "";
   const imageUrl = study.heroImageUrl || study.mockupImageUrl || "";
 
@@ -82,9 +81,7 @@ export default function CaseStudyHero({ study, solutionName }) {
     <Reveal as="section" className={styles.hero} eager aria-label={name}>
       <div className={styles.inner}>
         <div className={`${styles.copy} revealHead`}>
-          <p className={styles.badge}>
-            Case Study <span aria-hidden="true">•</span> {category}
-          </p>
+          <p className={styles.badge}>Case Study</p>
           <h1 className={styles.name}>{name}</h1>
           {heading ? <p className={styles.heading}>{heading}</p> : null}
           {summary ? <p className={styles.summary}>{summary}</p> : null}

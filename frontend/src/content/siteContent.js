@@ -12,14 +12,7 @@ export const navLinks = [
   {
     label: "Solutions",
     href: "/solutions",
-    children: [
-      { label: "PanelX", href: "/solutions/panel-x" },
-      { label: "ElectraX", href: "/solutions/electra-x" },
-      { label: "Construction Inspection", href: "/solutions/construction-inspection" },
-      { label: "Quote Automation", href: "/solutions/quote-automation" },
-      { label: "Drawing Intelligence", href: "/solutions/drawing-intelligence" },
-      { label: "View All Solutions", href: "/solutions", emphasis: true },
-    ],
+    children: [{ label: "View All Solutions", href: "/solutions", emphasis: true }],
   },
   {
     label: "Trades",
@@ -445,32 +438,6 @@ export const facadeContent = {
     eyebrow: "Our Façade Solutions",
     title: "Purpose-Built Systems for Complex Façade Work.",
     body: "From drawing intelligence to field operations, our solutions are designed around specific points where façade teams lose time, information or accuracy.",
-    cards: [
-      {
-        badge: "Client System",
-        imageKey: "panelX",
-        title: "PanelX",
-        body: "Drawings, panel status, and field activity in one connected façade workspace.",
-        href: "/solutions/panel-x",
-        ctaLabel: "View Solution",
-      },
-      {
-        badge: "Capability Showcase",
-        imageKey: "drawing",
-        title: "Drawing Intelligence",
-        body: "Compare revisions and extract what teams need from dense drawing sets.",
-        href: "/solutions/drawing-intelligence",
-        ctaLabel: "View Solution",
-      },
-      {
-        badge: "Capability Showcase",
-        imageKey: "quote",
-        title: "Quote Automation",
-        body: "Turn specs and drawings into structured quantities and quote-ready outputs.",
-        href: "/solutions/quote-automation",
-        ctaLabel: "View Solution",
-      },
-    ],
   },
   aiWorkflow: {
     eyebrow: "Intelligent Façade Technology",
@@ -558,6 +525,11 @@ export const constructionContent = {
       },
     ],
   },
+  relatedSolutions: {
+    eyebrow: "Our Construction Solutions",
+    title: "Purpose-Built Systems for Live Construction Work.",
+    body: "From field capture to automation and project intelligence, these solutions address the points where construction teams lose time and clarity.",
+  },
   cta: {
     title: "Build the next layer of your stack",
     body: "Describe the bottleneck. We’ll propose a practical path — custom build, AI, or both.",
@@ -578,56 +550,6 @@ export const caseStudiesContent = {
     title: "Outcomes you can point to",
     body: "Placeholder stories for structure — swap in real projects when you’re ready.",
   },
-  items: [
-    {
-      slug: "facade-panel-visibility",
-      title: "Panel visibility across shop and site",
-      industry: "Façade fabrication",
-      summary: "Replaced spreadsheet status with a shared panel tracker the whole project could trust.",
-      problem:
-        "A curtain wall fabricator tracked panel progress in multiple spreadsheets. Site teams called daily for updates; planners spent evenings reconciling versions.",
-      built:
-        "A web app for panel lifecycle status, simple filters by zone and elevation, and roles for shop, logistics, and site — fed by the team’s existing IDs.",
-      result:
-        "Fewer status calls, one agreed view of progress, and faster handoffs when units left the factory.",
-      quote: {
-        text: "We finally stopped arguing about which file was current.",
-        author: "Operations lead (placeholder)",
-      },
-    },
-    {
-      slug: "drawing-review-flow",
-      title: "Drawing review without the chase",
-      industry: "Façade engineering",
-      summary: "Centralized DWG review so comments and revisions lived in one place.",
-      problem:
-        "Review cycles lived in email. Markups got lost; newcomers couldn’t see why a detail changed.",
-      built:
-        "A viewer-led workflow with comment threads tied to drawings, notification digests, and a clear “current set” for each package.",
-      result:
-        "Shorter review loops and a trail new team members could follow without a meeting.",
-      quote: {
-        text: "The current set is obvious now — that alone was worth it.",
-        author: "Project engineer (placeholder)",
-      },
-    },
-    {
-      slug: "field-reporting-lite",
-      title: "Field reporting that people finish",
-      industry: "Construction",
-      summary: "A light mobile-friendly log that cut end-of-day admin without adding process weight.",
-      problem:
-        "Daily reports were incomplete or late because forms felt like punishment after a long shift.",
-      built:
-        "A short guided form, photo attach, and auto summary for managers — designed with site supervisors, not for them.",
-      result:
-        "Higher completion rates and managers who could skim mornings instead of chasing evenings.",
-      quote: {
-        text: "It’s short enough that people actually do it.",
-        author: "Site manager (placeholder)",
-      },
-    },
-  ],
 };
 
 export const aboutContent = {
@@ -681,35 +603,6 @@ export const aboutContent = {
   },
   team: {
     title: "Meet our team",
-    members: [
-      {
-        name: "Ghulam Murtaza",
-        role: "Founder | CEO",
-        linkedin: site.linkedin,
-        quote:
-          "Well done is better than well said — especially on a live project.",
-        quoteAuthor: "ConX Orbit",
-        detail:
-          "Sets direction, client relationships, and the standard for what we ship.",
-      },
-      {
-        name: "Mustafa",
-        role: "Co-Founder | Ops & Technical Lead",
-        linkedin: site.linkedin,
-        quote: "Great systems are created by people free to solve the real problem.",
-        quoteAuthor: "ConX Orbit",
-        detail:
-          "Owns delivery rhythm, technical decisions, and keeping builds grounded in the field.",
-      },
-      {
-        name: "Development team",
-        role: "Engineering & Design",
-        quote: "Our purpose is to help teams work with less friction and more focus.",
-        quoteAuthor: "ConX Orbit",
-        detail:
-          "Designers and engineers who turn workshops into working software — and keep it healthy after launch.",
-      },
-    ],
   },
   values: {
     eyebrow: "Our core values",

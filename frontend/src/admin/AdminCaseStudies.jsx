@@ -5,25 +5,97 @@ import { useAdminAuth } from "./AdminAuth";
 import AdminMediaField from "./AdminMediaField";
 import styles from "./admin.module.css";
 
-const EMPTY_POINT = { title: "", description: "" };
+const CATEGORIES = ["client-system", "internal-product", "workflow-solution", "other"];
+const EMPTY_CARD = { title: "", description: "" };
 
 const EMPTY = {
+  relatedSolutionId: "",
+  solutionName: "",
   title: "",
   slug: "",
-  category: "",
+  category: "other",
   shortDescription: "",
-  clientName: "",
-  industry: "",
-  trade: "",
-  projectType: "",
   heroImage: { url: "", publicId: "" },
-  problem: { description: "", points: [{ ...EMPTY_POINT }, { ...EMPTY_POINT }] },
-  solution: { description: "", points: [{ ...EMPTY_POINT }, { ...EMPTY_POINT }] },
-  relatedSolutionId: "",
+  problem: { title: "", description: "", cards: [] },
+  solution: { title: "", description: "", cards: [] },
+  cta: { title: "", description: "" },
   featured: false,
   published: true,
   sortOrder: 0,
-  seo: { title: "", description: "", ogImage: "" },
+};
+
+function relatedKey(value) {
+  if (!value) return "";
+  if (typeof value === "object") return String(value._id || value.id || "");
+  return String(value);
+}
+
+function solutionHeroTitle(sol) {
+  const hero = sol?.hero || {};
+  const combined = [hero.titleBefore, hero.titleHighlight, hero.titleAfter]
+    .map((part) => String(part || "").trim())
+    .filter(Boolean)
+    .join(" ");
+  return combined || String(sol?.name || "").trim();
+}
+
+function slugify(value) {
+  return String(value || "")
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function fromItem(item) {
+  const problemCards = item.problem?.cards?.length
+    ? item.problem.cards
+    : item.problem?.points || [];
+  const solutionCards = item.solution?.cards?.length
+    ? item.solution.cards
+    : item.solution?.points || [];
+  return {
+    ...EMPTY,
+    ...item,
+    relatedSolutionId: relatedKey(item.relatedSolutionId),
+    solutionName: item.solutionName || item.relatedSolutionId?.name || "",
+    heroImage: { url: "", publicId: "", ...(item.heroImage || {}) },
+    problem: {
+      title: item.problem?.title || "",
+      description: item.problem?.description || "",
+      cards: problemCards.length ? problemCards.map((card) => ({ ...EMPTY_CARD, ...card })) : [],
+    },
+    solution: {
+      title: item.solution?.title || "",
+      description: item.solution?.description || "",
+      cards: solutionCards.length ? solutionCards.map((card) => ({ ...EMPTY_CARD, ...card })) : [],
+    },
+    cta: {
+      title: item.cta?.title || "",
+      description: item.cta?.description || item.cta?.body || "",
+    },
+  };
+}
+
+function applySolutionToForm(form, sol, { fillSlug }) {
+  if (!sol) return form;
+  const nextSlug = fillSlug || !form.slug ? `${sol.slug || slugify(sol.name)}-case-study` : form.slug;
+  return {
+    ...form,
+    relatedSolutionId: String(sol._id),
+    solutionName: sol.name || "",
+    title: solutionHeroTitle(sol),
+    shortDescription: sol.shortDescription || sol.hero?.description || "",
+    category: CATEGORIES.includes(sol.category) ? sol.category : form.category || "other",
+    slug: nextSlug,
+  };
+}
+
+const cardBox = {
+  marginBottom: "16px",
+  padding: "16px",
+  border: "1px solid rgba(255,255,255,.1)",
+  borderRadius: "10px",
 };
 
 export default function AdminCaseStudies() {
@@ -34,6 +106,8 @@ export default function AdminCaseStudies() {
   const [editId, setEditId] = useState(null);
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
+
+  const selectedSolution = solutions.find((sol) => String(sol._id) === String(form.relatedSolutionId));
 
   const load = async () => {
     const [cases, sols] = await Promise.all([
@@ -51,25 +125,9 @@ export default function AdminCaseStudies() {
 
   const startEdit = (item) => {
     setEditId(item._id);
-    setForm({
-      ...EMPTY,
-      ...item,
-      heroImage: { url: "", publicId: "", ...(item.heroImage || {}) },
-      problem: {
-        description: item.problem?.description || "",
-        points: item.problem?.points?.length
-          ? item.problem.points
-          : [{ ...EMPTY_POINT }, { ...EMPTY_POINT }],
-      },
-      solution: {
-        description: item.solution?.description || "",
-        points: item.solution?.points?.length
-          ? item.solution.points
-          : [{ ...EMPTY_POINT }, { ...EMPTY_POINT }],
-      },
-      relatedSolutionId: item.relatedSolutionId ? String(item.relatedSolutionId) : "",
-      seo: { ...EMPTY.seo, ...(item.seo || {}) },
-    });
+    const next = fromItem(item);
+    const sol = solutions.find((row) => String(row._id) === next.relatedSolutionId);
+    setForm(sol ? applySolutionToForm(next, sol, { fillSlug: false }) : next);
   };
 
   const reset = () => {
@@ -77,19 +135,43 @@ export default function AdminCaseStudies() {
     setForm(EMPTY);
   };
 
+  const onSelectSolution = (id) => {
+    const sol = solutions.find((row) => String(row._id) === String(id));
+    if (!sol) {
+      setForm({ ...EMPTY, relatedSolutionId: "" });
+      return;
+    }
+    setForm((current) => applySolutionToForm({ ...current, relatedSolutionId: String(sol._id) }, sol, { fillSlug: !editId }));
+  };
+
   const onSave = async (event) => {
     event.preventDefault();
     setSaving(true);
     setError("");
     try {
+      if (!form.relatedSolutionId) {
+        throw new Error("Select a solution before saving this case study.");
+      }
       const payload = {
-        ...form,
-        relatedSolutionId: form.relatedSolutionId || null,
+        relatedSolutionId: form.relatedSolutionId,
+        slug: form.slug,
+        category: form.category,
+        heroImage: form.heroImage,
+        problem: {
+          title: form.problem.title,
+          description: form.problem.description,
+          cards: (form.problem.cards || []).filter((card) => card.title || card.description),
+        },
+        solution: {
+          title: form.solution.title,
+          description: form.solution.description,
+          cards: (form.solution.cards || []).filter((card) => card.title || card.description),
+        },
+        cta: form.cta,
+        featured: form.featured,
+        published: form.published,
+        sortOrder: Number(form.sortOrder) || 0,
       };
-      delete payload._id;
-      delete payload.__v;
-      delete payload.createdAt;
-      delete payload.updatedAt;
       if (editId) await api.admin.caseStudies.update(token, editId, payload);
       else await api.admin.caseStudies.create(token, payload);
       reset();
@@ -108,16 +190,26 @@ export default function AdminCaseStudies() {
     await load();
   };
 
-  const setProblemPoint = (index, key, value) => {
-    const points = [...(form.problem.points || [])];
-    points[index] = { ...points[index], [key]: value };
-    setForm({ ...form, problem: { ...form.problem, points } });
+  const updateSection = (section, key, value) => {
+    setForm({ ...form, [section]: { ...form[section], [key]: value } });
   };
 
-  const setSolutionPoint = (index, key, value) => {
-    const points = [...(form.solution.points || [])];
-    points[index] = { ...points[index], [key]: value };
-    setForm({ ...form, solution: { ...form.solution, points } });
+  const updateCard = (section, index, key, value) => {
+    const cards = [...(form[section].cards || [])];
+    cards[index] = { ...cards[index], [key]: value };
+    updateSection(section, "cards", cards);
+  };
+
+  const addCard = (section) => {
+    updateSection(section, "cards", [...(form[section].cards || []), { ...EMPTY_CARD }]);
+  };
+
+  const removeCard = (section, index) => {
+    updateSection(
+      section,
+      "cards",
+      (form[section].cards || []).filter((_, i) => i !== index)
+    );
   };
 
   return (
@@ -127,7 +219,7 @@ export default function AdminCaseStudies() {
       <table className={styles.table}>
         <thead>
           <tr>
-            <th>Title</th>
+            <th>Solution</th>
             <th>Slug</th>
             <th>Published</th>
             <th />
@@ -136,7 +228,7 @@ export default function AdminCaseStudies() {
         <tbody>
           {items.map((item) => (
             <tr key={item._id}>
-              <td>{item.title}</td>
+              <td>{item.solutionName || item.relatedSolutionId?.name || item.title}</td>
               <td>{item.slug}</td>
               <td>{item.published ? "Yes" : "No"}</td>
               <td className={styles.row}>
@@ -162,71 +254,14 @@ export default function AdminCaseStudies() {
 
       <h2 style={{ marginTop: 28 }}>{editId ? "Edit case study" : "New case study"}</h2>
       <form onSubmit={onSave} className={styles.grid2}>
-        <label className={styles.field}>
-          <span>Title</span>
-          <input
-            value={form.title}
-            onChange={(e) => setForm({ ...form, title: e.target.value })}
-            required
-          />
-        </label>
-        <label className={styles.field}>
-          <span>Slug</span>
-          <input
-            value={form.slug}
-            onChange={(e) => setForm({ ...form, slug: e.target.value })}
-            required
-          />
-        </label>
-        <label className={styles.field}>
-          <span>Category</span>
-          <input
-            value={form.category}
-            onChange={(e) => setForm({ ...form, category: e.target.value })}
-          />
-        </label>
-        <label className={styles.field}>
-          <span>Project type</span>
-          <input
-            value={form.projectType}
-            onChange={(e) => setForm({ ...form, projectType: e.target.value })}
-          />
-        </label>
         <label className={styles.field} style={{ gridColumn: "1 / -1" }}>
-          <span>Short description</span>
-          <textarea
-            value={form.shortDescription}
-            onChange={(e) => setForm({ ...form, shortDescription: e.target.value })}
-          />
-        </label>
-        <label className={styles.field}>
-          <span>Client name</span>
-          <input
-            value={form.clientName}
-            onChange={(e) => setForm({ ...form, clientName: e.target.value })}
-          />
-        </label>
-        <label className={styles.field}>
-          <span>Industry</span>
-          <input
-            value={form.industry}
-            onChange={(e) => setForm({ ...form, industry: e.target.value })}
-          />
-        </label>
-        <label className={styles.field}>
-          <span>Trade</span>
-          <input
-            value={form.trade}
-            onChange={(e) => setForm({ ...form, trade: e.target.value })}
-          />
-        </label>
-        <label className={styles.field}>
           <span>Related solution</span>
           <select
             value={form.relatedSolutionId || ""}
-            onChange={(e) => setForm({ ...form, relatedSolutionId: e.target.value })}
+            onChange={(e) => onSelectSolution(e.target.value)}
+            required
           >
-            <option value="">— none —</option>
+            <option value="">Select a solution…</option>
             {solutions.map((sol) => (
               <option key={sol._id} value={sol._id}>
                 {sol.name}
@@ -235,103 +270,222 @@ export default function AdminCaseStudies() {
           </select>
         </label>
 
-        <div style={{ gridColumn: "1 / -1" }}>
-          <AdminMediaField
-            label="Hero mockup image"
-            value={form.heroImage?.url || ""}
-            folder="Conx-orbit/case-studies"
-            onUploaded={({ url, publicId }) =>
-              setForm({ ...form, heroImage: { url, publicId } })
-            }
-            onClear={() => setForm({ ...form, heroImage: { url: "", publicId: "" } })}
-          />
-        </div>
+        {selectedSolution ? (
+          <>
+            <div className={styles.field} style={{ gridColumn: "1 / -1" }}>
+              <span>Hero details from solution</span>
+              <p className={styles.muted} style={{ margin: 0 }}>
+                These values are copied from the selected solution and stored on the case study.
+              </p>
+              <p style={{ margin: "8px 0 0" }}>
+                <strong>{form.solutionName}</strong>
+              </p>
+              {form.title ? <p className={styles.muted}>{form.title}</p> : null}
+              {form.shortDescription ? <p className={styles.muted}>{form.shortDescription}</p> : null}
+            </div>
 
-        <label className={styles.field} style={{ gridColumn: "1 / -1" }}>
-          <span>Problem description</span>
-          <textarea
-            value={form.problem?.description || ""}
-            onChange={(e) =>
-              setForm({ ...form, problem: { ...form.problem, description: e.target.value } })
-            }
-          />
-        </label>
-        {(form.problem?.points || []).map((point, index) => (
-          <div key={`pp-${index}`} className={styles.grid2} style={{ gridColumn: "1 / -1" }}>
             <label className={styles.field}>
-              <span>Problem point title</span>
+              <span>Slug</span>
               <input
-                value={point.title || ""}
-                onChange={(e) => setProblemPoint(index, "title", e.target.value)}
+                value={form.slug}
+                onChange={(e) => setForm({ ...form, slug: e.target.value })}
+                required
               />
             </label>
-            <label className={styles.field}>
-              <span>Problem point description</span>
-              <input
-                value={point.description || ""}
-                onChange={(e) => setProblemPoint(index, "description", e.target.value)}
-              />
-            </label>
-          </div>
-        ))}
 
-        <label className={styles.field} style={{ gridColumn: "1 / -1" }}>
-          <span>Solution description</span>
-          <textarea
-            value={form.solution?.description || ""}
-            onChange={(e) =>
-              setForm({ ...form, solution: { ...form.solution, description: e.target.value } })
-            }
-          />
-        </label>
-        {(form.solution?.points || []).map((point, index) => (
-          <div key={`sp-${index}`} className={styles.grid2} style={{ gridColumn: "1 / -1" }}>
             <label className={styles.field}>
-              <span>Solution point title</span>
-              <input
-                value={point.title || ""}
-                onChange={(e) => setSolutionPoint(index, "title", e.target.value)}
-              />
+              <span>Category</span>
+              <select
+                value={form.category}
+                onChange={(e) => setForm({ ...form, category: e.target.value })}
+              >
+                {CATEGORIES.map((category) => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
             </label>
-            <label className={styles.field}>
-              <span>Solution point description</span>
-              <input
-                value={point.description || ""}
-                onChange={(e) => setSolutionPoint(index, "description", e.target.value)}
-              />
-            </label>
-          </div>
-        ))}
 
-        <label className={styles.field}>
-          <span>Sort order</span>
-          <input
-            type="number"
-            value={form.sortOrder}
-            onChange={(e) => setForm({ ...form, sortOrder: Number(e.target.value) })}
-          />
-        </label>
-        <div className={styles.checkRow}>
-          <label>
-            <input
-              type="checkbox"
-              checked={form.published}
-              onChange={(e) => setForm({ ...form, published: e.target.checked })}
-            />
-            Published
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              checked={form.featured}
-              onChange={(e) => setForm({ ...form, featured: e.target.checked })}
-            />
-            Featured
-          </label>
-        </div>
+            <div style={{ gridColumn: "1 / -1" }}>
+              <AdminMediaField
+                label="Hero mockup image"
+                value={form.heroImage?.url || ""}
+                folder="Conx-orbit/case-studies"
+                onUploaded={({ url, publicId }) =>
+                  setForm({ ...form, heroImage: { url, publicId } })
+                }
+                onClear={() => setForm({ ...form, heroImage: { url: "", publicId: "" } })}
+              />
+            </div>
+
+            <h2 style={{ gridColumn: "1 / -1", marginBottom: 0 }}>The Problem</h2>
+            <label className={styles.field} style={{ gridColumn: "1 / -1" }}>
+              <span>Heading</span>
+              <input
+                value={form.problem.title}
+                onChange={(e) => updateSection("problem", "title", e.target.value)}
+              />
+            </label>
+            <label className={styles.field} style={{ gridColumn: "1 / -1" }}>
+              <span>Description</span>
+              <textarea
+                value={form.problem.description}
+                onChange={(e) => updateSection("problem", "description", e.target.value)}
+              />
+            </label>
+            <div style={{ gridColumn: "1 / -1" }}>
+              <h3>Problem cards</h3>
+              {(form.problem.cards || []).map((card, index) => (
+                <div key={`problem-${index}`} style={cardBox}>
+                  <div className={styles.grid2}>
+                    <label className={styles.field}>
+                      <span>Card {index + 1} title</span>
+                      <input
+                        value={card.title || ""}
+                        onChange={(e) => updateCard("problem", index, "title", e.target.value)}
+                      />
+                    </label>
+                    <label className={styles.field}>
+                      <span>Description</span>
+                      <textarea
+                        value={card.description || ""}
+                        onChange={(e) =>
+                          updateCard("problem", index, "description", e.target.value)
+                        }
+                      />
+                    </label>
+                  </div>
+                  <button
+                    type="button"
+                    className={`${styles.btn} ${styles.btnSecondary}`}
+                    onClick={() => removeCard("problem", index)}
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
+              <button
+                type="button"
+                className={`${styles.btn} ${styles.btnSecondary}`}
+                onClick={() => addCard("problem")}
+              >
+                + Add Problem
+              </button>
+            </div>
+
+            <h2 style={{ gridColumn: "1 / -1", marginBottom: 0 }}>Our Solution</h2>
+            <label className={styles.field} style={{ gridColumn: "1 / -1" }}>
+              <span>Heading</span>
+              <input
+                value={form.solution.title}
+                onChange={(e) => updateSection("solution", "title", e.target.value)}
+              />
+            </label>
+            <label className={styles.field} style={{ gridColumn: "1 / -1" }}>
+              <span>Description</span>
+              <textarea
+                value={form.solution.description}
+                onChange={(e) => updateSection("solution", "description", e.target.value)}
+              />
+            </label>
+            <div style={{ gridColumn: "1 / -1" }}>
+              <h3>Solution cards</h3>
+              {(form.solution.cards || []).map((card, index) => (
+                <div key={`solution-${index}`} style={cardBox}>
+                  <div className={styles.grid2}>
+                    <label className={styles.field}>
+                      <span>Card {index + 1} title</span>
+                      <input
+                        value={card.title || ""}
+                        onChange={(e) => updateCard("solution", index, "title", e.target.value)}
+                      />
+                    </label>
+                    <label className={styles.field}>
+                      <span>Description</span>
+                      <textarea
+                        value={card.description || ""}
+                        onChange={(e) =>
+                          updateCard("solution", index, "description", e.target.value)
+                        }
+                      />
+                    </label>
+                  </div>
+                  <button
+                    type="button"
+                    className={`${styles.btn} ${styles.btnSecondary}`}
+                    onClick={() => removeCard("solution", index)}
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
+              <button
+                type="button"
+                className={`${styles.btn} ${styles.btnSecondary}`}
+                onClick={() => addCard("solution")}
+              >
+                + Add Solution
+              </button>
+            </div>
+
+            <h2 style={{ gridColumn: "1 / -1", marginBottom: 0 }}>CTA</h2>
+            <label className={styles.field} style={{ gridColumn: "1 / -1" }}>
+              <span>Title</span>
+              <input
+                value={form.cta.title}
+                onChange={(e) => updateSection("cta", "title", e.target.value)}
+                placeholder={`See ${form.solutionName || "the solution"} in more detail.`}
+              />
+            </label>
+            <label className={styles.field} style={{ gridColumn: "1 / -1" }}>
+              <span>Description</span>
+              <textarea
+                value={form.cta.description}
+                onChange={(e) => updateSection("cta", "description", e.target.value)}
+                placeholder="Explore the full solution, its capabilities and the workflow it was designed around."
+              />
+            </label>
+            <p className={styles.muted} style={{ gridColumn: "1 / -1", margin: 0 }}>
+              Buttons are fixed: View Solution and Explore More Case Studies.
+            </p>
+
+            <label className={styles.field}>
+              <span>Sort order</span>
+              <input
+                type="number"
+                value={form.sortOrder}
+                onChange={(e) => setForm({ ...form, sortOrder: Number(e.target.value) })}
+              />
+            </label>
+            <div className={styles.checkRow}>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={form.published}
+                  onChange={(e) => setForm({ ...form, published: e.target.checked })}
+                />
+                Published
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={form.featured}
+                  onChange={(e) => setForm({ ...form, featured: e.target.checked })}
+                />
+                Featured
+              </label>
+            </div>
+          </>
+        ) : (
+          <p className={styles.muted} style={{ gridColumn: "1 / -1" }}>
+            Select a solution first. The case study hero will use that solution’s name, title, and
+            description.
+          </p>
+        )}
 
         <div className={styles.row} style={{ gridColumn: "1 / -1" }}>
-          <button className={styles.btn} type="submit" disabled={saving}>
+          <button className={styles.btn} type="submit" disabled={saving || !form.relatedSolutionId}>
             {saving ? "Saving…" : editId ? "Update" : "Create"}
           </button>
           {editId ? (

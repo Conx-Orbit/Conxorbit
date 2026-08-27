@@ -57,5 +57,4 @@ Local without SMTP/EmailJS: `CONTACT_MODE=log`
 ## Notes
 
 - Seed: `npm run seed` → `src/seed/seedMongo.js` (uploads real placeholder images from `frontend/src/assets/solutions`)
-- Legacy LowDB seed: `npm run seed:lowdb` (page chrome / old JSON only)
 - Health: `GET /api/health` includes Mongo connection status

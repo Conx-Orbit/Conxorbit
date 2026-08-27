@@ -44,7 +44,8 @@ export const api = {
   getCaseStudy: (slug) => request(`/api/case-studies/${encodeURIComponent(slug)}`),
   getTeam: () => request("/api/team"),
   getOffers: () => request("/api/offers"),
-  getPageContent: (key) => request(`/api/page-content/${encodeURIComponent(key)}`),
+  getServiceConfiguration: (serviceSlug) =>
+    request(`/api/service-configurations/${encodeURIComponent(serviceSlug)}`),
   login: (email, password) => request("/api/auth/login", { method: "POST", body: { email, password } }),
   admin: {
     solutions: {
@@ -75,11 +76,11 @@ export const api = {
         request(`/api/admin/offers/${id}`, { method: "PUT", token, body }),
       remove: (token, id) => request(`/api/admin/offers/${id}`, { method: "DELETE", token }),
     },
-    pageContent: {
-      get: (token, key) =>
-        request(`/api/admin/page-content/${encodeURIComponent(key)}`, { token }),
-      put: (token, key, body) =>
-        request(`/api/admin/page-content/${encodeURIComponent(key)}`, {
+    serviceConfigurations: {
+      get: (token, serviceSlug) =>
+        request(`/api/service-configurations/${encodeURIComponent(serviceSlug)}`, { token }),
+      put: (token, serviceSlug, body) =>
+        request(`/api/service-configurations/${encodeURIComponent(serviceSlug)}`, {
           method: "PUT",
           token,
           body,

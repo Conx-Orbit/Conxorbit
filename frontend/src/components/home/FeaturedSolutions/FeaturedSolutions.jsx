@@ -41,7 +41,7 @@ export default function FeaturedSolutions({ content }) {
         {cards.map((card) => {
           const src = card.image || CARD_IMAGES[card.imageKey];
           return (
-            <article key={card.title} className={`${styles.card} interactiveCard cardReveal`}>
+            <article key={card.href || card.title} className={`${styles.card} interactiveCard cardReveal`}>
               <span className={styles.cardBadge}>
                 <span className={styles.dot} aria-hidden="true" />
                 {card.badge}

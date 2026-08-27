@@ -23,20 +23,13 @@ function categoryLabel(category) {
 export default function FacadeSolution() {
   const { meta, hero, workflow, complexity, panelX, solutions, aiWorkflow, cta } = facadeContent;
   const [solutionCards, setSolutionCards] = useState([]);
-  const [sectionChrome, setSectionChrome] = useState({
-    eyebrow: solutions?.eyebrow,
-    title: solutions?.title,
-    body: solutions?.body,
-  });
   const [loadError, setLoadError] = useState("");
 
   useEffect(() => {
     let alive = true;
-    Promise.all([
-      api.getSolutions("?trade=facade"),
-      api.getPageContent("facadeSolutions").catch(() => null),
-    ])
-      .then(([rows, chrome]) => {
+    api
+      .getSolutions("?trade=facade")
+      .then((rows) => {
         if (!alive) return;
         setSolutionCards(
           (rows || []).map((row) => ({
@@ -48,13 +41,6 @@ export default function FacadeSolution() {
             image: mediaUrl(row.hero?.mockup?.url || row.image),
           }))
         );
-        if (chrome) {
-          setSectionChrome({
-            eyebrow: chrome.eyebrow || solutions?.eyebrow,
-            title: chrome.title || solutions?.title,
-            body: chrome.body || solutions?.body,
-          });
-        }
         setLoadError("");
       })
       .catch((err) => {
@@ -65,10 +51,10 @@ export default function FacadeSolution() {
     return () => {
       alive = false;
     };
-  }, [solutions]);
+  }, []);
 
   const solutionsContent = {
-    ...sectionChrome,
+    ...solutions,
     cards: solutionCards,
   };
 

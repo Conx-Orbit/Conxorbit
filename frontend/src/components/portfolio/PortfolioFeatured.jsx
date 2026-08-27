@@ -3,15 +3,9 @@ import Reveal from "../common/Reveal";
 import SectionBadge from "../common/SectionBadge";
 import styles from "./PortfolioFeatured.module.css";
 
-export default function PortfolioFeatured({ content, onOpenCaseStudy }) {
+export default function PortfolioFeatured({ content }) {
   if (!content) return null;
-  const { badge, label, name, title, body, tags = [], cta, image, imageFallback } = content;
-
-  const handleCta = (event) => {
-    if (!onOpenCaseStudy || !cta?.href) return;
-    event.preventDefault();
-    onOpenCaseStudy(cta.href);
-  };
+  const { badge, label, name, title, body, tags = [], href, caseStudyHref, image, imageFallback } = content;
 
   return (
     <Reveal as="section" className={styles.section} aria-label={badge}>
@@ -33,16 +27,20 @@ export default function PortfolioFeatured({ content, onOpenCaseStudy }) {
                 </span>
               ))}
             </div>
-            {cta ? (
-              <Link
-                className={`${styles.cta} linkDraw`}
-                to={cta.href}
-                onClick={handleCta}
-              >
-                {cta.label}
-                <span aria-hidden="true">→</span>
-              </Link>
-            ) : null}
+            <div className={styles.ctas}>
+              {href ? (
+                <Link className={`${styles.cta} linkDraw`} to={href}>
+                  Learn More
+                  <span aria-hidden="true">→</span>
+                </Link>
+              ) : null}
+              {caseStudyHref ? (
+                <Link className={`${styles.cta} linkDraw`} to={caseStudyHref}>
+                  View Case Study
+                  <span aria-hidden="true">→</span>
+                </Link>
+              ) : null}
+            </div>
           </div>
           <div className={`${styles.media} mediaZoom`}>
             <img src={image || imageFallback} alt="" loading="lazy" />

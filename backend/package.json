@@ -6,8 +6,7 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
-    "seed": "node src/seed/seedMongo.js",
-    "seed:lowdb": "node src/seed/seed.js"
+    "seed": "node src/seed/seedMongo.js"
   },
   "dependencies": {
     "@emailjs/nodejs": "^5.0.2",
@@ -17,7 +16,6 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
-    "lowdb": "^1.0.0",
     "mongodb": "^7.5.0",
     "mongoose": "^8.12.1",
     "morgan": "^1.10.0",

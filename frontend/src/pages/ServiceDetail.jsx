@@ -1,3 +1,4 @@
+import { useEffect, useMemo, useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import SEO from "../components/common/SEO";
 import PageShell from "../components/layout/PageShell/PageShell";
@@ -11,11 +12,56 @@ import FeaturedSolutions from "../components/home/FeaturedSolutions/FeaturedSolu
 import FAQAccordion from "../components/home/FAQAccordion/FAQAccordion";
 import { getServicePage } from "../content/servicePages";
 import { homeContent } from "../content/siteContent";
+import { api, mediaUrl } from "../api/client";
 import styles from "./ServiceDetail.module.css";
+
+function categoryLabel(category) {
+  const value = String(category || "").trim();
+  if (!value) return "Solution";
+  return value
+    .split("-")
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ");
+}
+
+function mapFeaturedCard(item) {
+  const tags = Array.isArray(item.tags) ? item.tags : item.categories || [];
+  return {
+    badge: tags[0] || categoryLabel(item.category),
+    image: mediaUrl(item.hero?.mockup?.url || item.image),
+    title: item.name,
+    description: item.shortDescription || item.description || "",
+    href: `/solutions/${item.slug}`,
+    cta: "View Solution",
+  };
+}
 
 export default function ServiceDetail() {
   const { slug } = useParams();
   const page = getServicePage(slug);
+  const [featuredCards, setFeaturedCards] = useState([]);
+
+  useEffect(() => {
+    if (!page?.slug) return undefined;
+    let alive = true;
+    api
+      .getServiceConfiguration(page.slug)
+      .then((data) => {
+        if (!alive) return;
+        setFeaturedCards((data?.featuredSolutionIds || []).map(mapFeaturedCard));
+      })
+      .catch(() => {
+        if (alive) setFeaturedCards([]);
+      });
+    return () => {
+      alive = false;
+    };
+  }, [page?.slug]);
+
+  const featuredContent = useMemo(() => {
+    if (!page?.featured) return null;
+    return { ...page.featured, cards: featuredCards };
+  }, [page?.featured, featuredCards]);
 
   if (!page) {
     return <Navigate to="/services/custom-ai-development" replace />;
@@ -35,7 +81,9 @@ export default function ServiceDetail() {
         <ServiceValue content={page.value} />
         <ServiceApproach content={page.approach} />
         <ServiceCapabilities content={page.capabilities} />
-        <FeaturedSolutions content={page.featured} />
+        {featuredContent && featuredCards.length ? (
+          <FeaturedSolutions content={featuredContent} />
+        ) : null}
         <ServiceWhy content={page.why} />
         <FAQAccordion content={faq} />
         <ServiceFinalCta content={page.cta} />

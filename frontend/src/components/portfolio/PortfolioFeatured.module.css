@@ -96,6 +96,13 @@
   font-size: 0.86rem;
 }
 
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 20px;
+}
+
 .media {
   border-radius: 2px;
   overflow: hidden;

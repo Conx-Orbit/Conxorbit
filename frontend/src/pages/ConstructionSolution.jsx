@@ -16,25 +16,16 @@ function categoryLabel(category) {
     .join(" ");
 }
 
-const DEFAULT_CHROME = {
-  eyebrow: "Our Construction Solutions",
-  title: "Purpose-Built Systems for Live Construction Work.",
-  body: "From field capture to automation and project intelligence, these solutions address the points where construction teams lose time and clarity.",
-};
-
 export default function ConstructionSolution() {
-  const { meta, hero, painPoints, capabilities, cta } = constructionContent;
+  const { meta, hero, painPoints, capabilities, relatedSolutions, cta } = constructionContent;
   const [solutionCards, setSolutionCards] = useState([]);
-  const [sectionChrome, setSectionChrome] = useState(DEFAULT_CHROME);
   const [loadError, setLoadError] = useState("");
 
   useEffect(() => {
     let alive = true;
-    Promise.all([
-      api.getSolutions("?trade=construction"),
-      api.getPageContent("constructionSolutions").catch(() => null),
-    ])
-      .then(([rows, chrome]) => {
+    api
+      .getSolutions("?trade=construction")
+      .then((rows) => {
         if (!alive) return;
         setSolutionCards(
           (rows || []).map((row) => ({
@@ -46,13 +37,6 @@ export default function ConstructionSolution() {
             image: mediaUrl(row.hero?.mockup?.url || row.image),
           }))
         );
-        if (chrome) {
-          setSectionChrome({
-            eyebrow: chrome.eyebrow || DEFAULT_CHROME.eyebrow,
-            title: chrome.title || DEFAULT_CHROME.title,
-            body: chrome.body || DEFAULT_CHROME.body,
-          });
-        }
         setLoadError("");
       })
       .catch((err) => {
@@ -81,7 +65,7 @@ export default function ConstructionSolution() {
       />
       <FeatureList title={capabilities.title} items={capabilities.items} tone="dark" />
       {loadError ? <p style={{ textAlign: "center", padding: 24 }}>{loadError}</p> : null}
-      <FacadeSolutions content={{ ...sectionChrome, cards: solutionCards }} />
+      <FacadeSolutions content={{ ...relatedSolutions, cards: solutionCards }} />
       <CTABand title={cta.title} body={cta.body} href={cta.href} label={cta.label} />
     </PageShell>
   );

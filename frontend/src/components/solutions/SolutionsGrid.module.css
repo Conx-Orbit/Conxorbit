@@ -21,7 +21,6 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
   text-decoration: none;
   color: inherit;
-  cursor: pointer;
 }
 
 .badge {
@@ -99,7 +98,21 @@
   text-decoration-thickness: 1px;
 }
 
-.card:hover .learnMore {
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px 16px;
+  margin-top: 4px;
+}
+
+.actions .learnMore {
+  align-self: auto;
+  margin-top: 0;
+}
+
+.learnMore:hover {
   color: #f7f7f4;
 }
 

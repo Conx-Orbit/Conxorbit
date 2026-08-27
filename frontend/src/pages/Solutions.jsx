@@ -5,7 +5,7 @@ import SolutionsHero from "../components/solutions/SolutionsHero";
 import SolutionsFilterBar from "../components/solutions/SolutionsFilterBar";
 import SolutionsGrid from "../components/solutions/SolutionsGrid";
 import SolutionsFinalCta from "../components/solutions/SolutionsFinalCta";
-import { solutionsListing as staticListing } from "../content/solutionsContent";
+import { solutionsListing } from "../content/solutionsContent";
 import { api, mediaUrl } from "../api/client";
 import styles from "./Solutions.module.css";
 
@@ -42,7 +42,6 @@ function categoriesFromSolutions(solutions) {
 }
 
 export default function Solutions() {
-  const [listing, setListing] = useState(staticListing);
   const [activeFilter, setActiveFilter] = useState("All");
   const [search, setSearch] = useState("");
   const [solutions, setSolutions] = useState([]);
@@ -50,14 +49,11 @@ export default function Solutions() {
 
   useEffect(() => {
     let alive = true;
-    Promise.all([
-      api.getSolutions(),
-      api.getPageContent("solutionsListing").catch(() => null),
-    ])
-      .then(([rows, chrome]) => {
+    api
+      .getSolutions()
+      .then((rows) => {
         if (!alive) return;
         setSolutions(rows.map(mapSolution));
-        if (chrome) setListing({ ...staticListing, ...chrome });
         setError("");
       })
       .catch((err) => {
@@ -95,7 +91,7 @@ export default function Solutions() {
     });
   }, [activeFilter, search, solutions]);
 
-  const { meta, hero, searchPlaceholder, cta } = listing;
+  const { meta, hero, searchPlaceholder, cta } = solutionsListing;
 
   return (
     <PageShell atmosphere="products">

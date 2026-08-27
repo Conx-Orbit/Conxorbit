@@ -160,6 +160,13 @@
   font-size: 0.8rem;
 }
 
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
 @media (max-width: 760px) {
   .grid {
     grid-template-columns: 1fr;

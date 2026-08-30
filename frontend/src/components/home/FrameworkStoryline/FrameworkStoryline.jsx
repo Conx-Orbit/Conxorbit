@@ -212,6 +212,7 @@ export default function FrameworkStoryline({ content }) {
   } = content;
 
   const rootRef = useRef(null);
+  const storyRef = useRef(null);
   const pathRef = useRef(null);
   const glowRef = useRef(null);
   const reduced = usePrefersReducedMotion();
@@ -233,13 +234,20 @@ export default function FrameworkStoryline({ content }) {
   const viewBox = `0 0 ${width} ${height}`;
 
   useEffect(() => {
-    if (reduced || !rootRef.current || !pathRef.current || !pathD) {
+    if (
+      reduced ||
+      !rootRef.current ||
+      !storyRef.current ||
+      !pathRef.current ||
+      !pathD
+    ) {
       if (reduced) setActiveIndex(steps.length - 1);
       return undefined;
     }
 
     const { gsap } = ensureGsap();
     const root = rootRef.current;
+    const story = storyRef.current;
     const path = pathRef.current;
     const glow = glowRef.current;
     const stepEls = root.querySelectorAll(`.${styles.step}`);
@@ -258,12 +266,11 @@ export default function FrameworkStoryline({ content }) {
 
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: root,
-          start: "top 70%",
-          end: "bottom 55%",
+          trigger: story,
+          start: "top 72%",
+          end: "bottom 72%",
           scrub: true,
           invalidateOnRefresh: true,
-          fastScrollEnd: true,
           onUpdate: (self) => {
             const idx = Math.min(total - 1, Math.floor(self.progress * total));
             if (activeIndexRef.current === idx) return;
@@ -319,7 +326,7 @@ export default function FrameworkStoryline({ content }) {
           </div>
         </Reveal>
 
-        <div className={styles.story} style={{ minHeight: height }}>
+        <div ref={storyRef} className={styles.story} style={{ minHeight: height }}>
           <svg
             className={styles.pathSvg}
             viewBox={viewBox}

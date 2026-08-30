@@ -14,6 +14,9 @@ export default function SolutionDetailHero({ solution }) {
   } = hero || {};
   const reduced = usePrefersReducedMotion();
   const heroImage = hero?.mockup?.url || image;
+  const beforeText = titleBefore?.trim();
+  const highlightText = titleHighlight?.trim() || name;
+  const afterText = titleAfter?.trim();
 
   const scrollToDemo = (event) => {
     event.preventDefault();
@@ -27,9 +30,9 @@ export default function SolutionDetailHero({ solution }) {
       <div className={`${styles.copy} heroStagger`}>
         <SectionBadge icon={false}>{name}</SectionBadge>
         <h1 className={styles.title}>
-          {titleBefore}
-          <span className={styles.highlight}>{titleHighlight || name}</span>
-          {titleAfter}
+          {beforeText ? <>{beforeText}{" "}</> : null}
+          <span className={styles.highlight}>{highlightText}</span>
+          {afterText ? <>{" "}{afterText}</> : null}
         </h1>
         {shortDescription || description ? (
           <p className={styles.body}>{shortDescription || description}</p>

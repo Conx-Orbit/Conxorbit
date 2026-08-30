@@ -2,16 +2,14 @@ import { Link } from "react-router-dom";
 import Reveal from "../../common/Reveal";
 import SectionBadge from "../../common/SectionBadge";
 import facade from "../../../assets/tradeCards/facade.jfif";
-import glass from "../../../assets/tradeCards/glass.jfif";
-import aluminium from "../../../assets/tradeCards/aluminium.jfif";
-import exterior from "../../../assets/tradeCards/exterior.webp";
+import quoteGen from "../../../assets/images/quote-generation.png";
+import flatforge from "../../../assets/images/flatforge.png";
 import styles from "./FeaturedSolutions.module.css";
 
 const CARD_IMAGES = {
+  quoteGen,
   facade,
-  glass,
-  aluminium,
-  exterior,
+  flatforge,
 };
 
 export default function FeaturedSolutions({ content }) {

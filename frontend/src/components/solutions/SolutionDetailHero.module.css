@@ -173,6 +173,8 @@
 .viewport {
   aspect-ratio: 16 / 10;
   max-height: 480px;
+  padding: clamp(10px, 1.5vw, 16px);
+  box-sizing: border-box;
   overflow: hidden;
   background: #0b1b17;
 }
@@ -180,9 +182,10 @@
 .viewport img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center top;
+  object-fit: contain;
+  object-position: center;
   display: block;
+  border-radius: 8px;
 }
 
 @media (max-width: 900px) {

@@ -50,16 +50,17 @@
 
 .card {
   position: absolute;
-  width: min(58%, 420px);
+  width: min(62%, 440px);
   aspect-ratio: 4 / 3;
   border-radius: 24px;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(8, 18, 14, 0.5);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: #08120e;
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.38);
   cursor: pointer;
   transform-style: preserve-3d;
+  isolation: isolate;
+
   transition:
     transform 480ms cubic-bezier(0.22, 1, 0.36, 1),
     opacity 480ms ease,
@@ -71,109 +72,234 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  filter: brightness(0.72) saturate(0.88);
+  transition:
+    filter 400ms ease,
+    transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card:hover img,
+.cardActive img {
+  filter: brightness(0.82) saturate(0.95);
+  transform: scale(1.035);
 }
 
 .cardActive {
-  border-color: rgba(184, 137, 61, 0.55);
+  border-color: rgba(184, 137, 61, 0.75);
   box-shadow:
-    0 32px 70px rgba(0, 0, 0, 0.45),
-    0 0 40px rgba(184, 137, 61, 0.2);
+    0 32px 70px rgba(0, 0, 0, 0.5),
+    0 0 38px rgba(184, 137, 61, 0.18);
+}
+
+/* Improves contrast across the whole image */
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(4, 17, 15, 0.05) 15%,
+      rgba(4, 17, 15, 0.2) 45%,
+      rgba(4, 17, 15, 0.96) 100%
+    );
 }
 
 .overlay {
   position: absolute;
   inset: auto 0 0;
-  padding: 18px 20px;
-  background: linear-gradient(180deg, transparent, rgba(1, 15, 14, 0.92));
+  z-index: 2;
+  padding: 28px 26px 24px;
 }
 
 .tag {
-  display: inline-block;
-  font-size: 0.72rem;
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 5px 9px;
+  margin-bottom: 10px;
+
+  border: 1px solid rgba(216, 231, 151, 0.38);
+  border-radius: 999px;
+  background: rgba(20, 48, 46, 0.68);
+  backdrop-filter: blur(8px);
+
+  color: #d8e797;
+  font-size: 0.68rem;
+  font-weight: 600;
+  line-height: 1;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--olive-light);
-  margin-bottom: 6px;
 }
 
 .overlay h3 {
-  font-size: var(--heading-size-h4);
-  color: var(--color-text);
-  margin-bottom: 4px;
+  max-width: 90%;
+  margin: 0 0 7px;
+
+  color: #f4f5eb;
+  font-size: clamp(1.25rem, 2vw, 1.65rem);
+  font-weight: 650;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
 }
 
 .overlay p {
-  font-size: 0.9rem;
-  color: var(--color-muted);
+  max-width: 90%;
+  margin: 0;
+
+  color: rgba(244, 245, 235, 0.78);
+  font-size: clamp(0.78rem, 1.2vw, 0.9rem);
+  font-weight: 400;
+  line-height: 1.45;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.65);
 }
 
 .controls {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 18px;
+  gap: clamp(16px, 3vw, 28px);
   margin-top: 28px;
 }
 
 .arrow {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 999px;
-  border: 1px solid rgba(138, 158, 92, 0.55);
-  background: rgba(8, 18, 14, 0.55);
-  color: var(--olive-light);
-  font-size: 1.55rem;
-  line-height: 1;
+  display: inline-grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  padding: 0;
+  border: 1px solid rgba(216, 231, 151, 0.3);
+  border-radius: 50%;
+  background: linear-gradient(145deg, rgba(31, 66, 59, 0.88), rgba(8, 24, 20, 0.92));
+  color: #d8e797;
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
   transition:
-    background 200ms ease,
-    border-color 200ms ease,
-    transform 200ms ease;
+    color 220ms ease,
+    border-color 220ms ease,
+    background 220ms ease,
+    box-shadow 220ms ease,
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.arrow svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .arrow:hover {
-  background: rgba(184, 137, 61, 0.18);
-  border-color: rgba(243, 201, 105, 0.75);
-  transform: translateY(-1px);
+  color: #fff8dc;
+  border-color: rgba(184, 137, 61, 0.85);
+  background: linear-gradient(145deg, rgba(184, 137, 61, 0.32), rgba(18, 48, 41, 0.96));
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.35),
+    0 0 22px rgba(184, 137, 61, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  transform: translateY(-2px);
+}
+
+.arrow:active {
+  transform: translateY(0) scale(0.95);
+}
+
+.arrow:focus-visible {
+  outline: 3px solid rgba(216, 231, 151, 0.38);
+  outline-offset: 4px;
+  border-color: #d8e797;
 }
 
 .dots {
   display: flex;
+  align-items: center;
   justify-content: center;
   gap: 8px;
 }
 
 .dot,
 .dotActive {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  border: none;
+  width: 7px;
+  height: 7px;
   padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(216, 231, 151, 0.3);
   cursor: pointer;
-  background: rgba(255, 255, 255, 0.25);
+  transition:
+    width 240ms ease,
+    background-color 240ms ease,
+    box-shadow 240ms ease;
 }
 
 .dotActive {
-  background: var(--gold);
-  box-shadow: 0 0 12px rgba(184, 137, 61, 0.55);
+  width: 24px;
+  background: #b8893d;
+  box-shadow: 0 0 12px rgba(184, 137, 61, 0.42);
 }
+
+.dot:focus-visible,
+.dotActive:focus-visible {
+  outline: 2px solid #d8e797;
+  outline-offset: 3px;
+}
+
 
 @media (max-width: 720px) {
   .stage {
-    height: 280px;
+    height: 300px;
   }
 
   .card {
-    width: 78%;
+    width: 84%;
+    border-radius: 20px;
+  }
+
+  .overlay {
+    padding: 24px 20px 20px;
+  }
+
+  .overlay h3 {
+    max-width: 100%;
+    font-size: 1.2rem;
+  }
+
+  .overlay p {
+    max-width: 100%;
+    font-size: 0.78rem;
+  }
+
+  .controls {
+    gap: 14px;
+    margin-top: 22px;
+  }
+
+  .arrow {
+    width: 42px;
+    height: 42px;
+    flex-basis: 42px;
+  }
+
+  .arrow svg {
+    width: 20px;
+    height: 20px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .card {
+  .arrow,
+  .dot,
+  .dotActive {
     transition: none;
   }
 }

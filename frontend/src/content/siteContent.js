@@ -1,3 +1,5 @@
+import serviceImage from "../assets/images/services-image.png"
+
 export const site = {
   name: "ConX Orbit",
   tagline: "Custom software and AI for construction and façade teams",
@@ -54,14 +56,14 @@ export const homeContent = {
   },
   hero: {
     eyebrow: "Built for Façade & Construction Teams",
-    title: "Software Built Around How Your Team Actually Works",
-    body: "From drawings to site delivery — we build around your actual workflow, not shelf software forced to fit. You see it working before you commit to the rest.",
+    title: "AI Automation Built Around How Your Team Actually Works",
+    body: "From drawings and estimating to fabrication and site operations, we build AI-powered systems that reduce manual work, connect project information, and help your team move faster.",
     primaryCta: { label: "Book a Discovery Call", href: "/book-discovery" },
     secondaryCta: { label: "Explore Solutions", href: "/solutions" },
     statCards: [
-      { label: "Ground-Truth Build" },
-      { label: "Custom-Built Systems" },
-      { label: "Built for Façade Teams" },
+      { label: "No generic software" },
+      { label: "No forced workflows" },
+      { label: "We build around yours" },
     ],
   },
   tradeShowcase: {
@@ -71,24 +73,24 @@ export const homeContent = {
   },
   challenges: {
     badge: "Where We Create Impact",
-    titleBefore: "Every Manual Step Costs You  ",
-    titleHighlight: "Time You Can't Get Back",
+    titleBefore: "Too Much Work Still ",
+    titleHighlight: "Happens Manually",
     titleAfter: ".",
-    body: "Every project depends on hundreds of repetitive decisions—from reviewing drawings and preparing quotations to tracking fabrication and documenting site progress. We build intelligent systems that remove friction from these everyday workflows.",
+    body: "Your team already has the tools. The problem is everything happening between them.",
     ctaLabel: "Explore your Workflow",
     closingLine:
-      "Every workflow is different. That's why every build starts as a Ground-Truth Build — we study how your team actually works before we write a line of code.",
+      "Those small tasks add up — more time, more rework, and more room for mistakes.",
     cards: [
       {
         icon: "estimation",
         accent: "olive",
-        title: "Manual Estimation",
-        body: "Still reviewing drawings manually and building quotations in spreadsheets?",
+        title: "Estimating & RFQs",
+        body: "RFQs arrive through email and WhatsApp. Analyze documents to extract Quantities.",
       },
       {
         icon: "revisions",
         accent: "gold",
-        title: "Drawing Revisions",
+        title: "Drawing Workflows",
         body: "Tracking revisions across multiple drawing versions wastes engineering hours.",
       },
       {
@@ -107,19 +109,19 @@ export const homeContent = {
   },
   services: {
     badge: "HOW WE HELP",
-    titleBefore: "From Workflow Challenges to ",
-    titleHighlight: "Working Solutions",
+    titleBefore: "Technology Built Around",
+    titleHighlight: " Your Workflow",
     titleAfter: ".",
-    body: "Every construction business operates differently. We combine software engineering, AI, and deep workflow understanding to build systems.",
-    image:
-      "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1400&q=80",
-    imageCaption: "Strategize. Prioritize. Transform.",
+    body: "We identify workflow gaps and build practical systems using AI, automation and custom software.",
+    image: serviceImage,
+      alt: "Illustration of a construction workflow with AI and automation",
+    imageCaption: "Implement, Train, Adopt. ",
     items: [
       {
         id: "workflow",
         label: "Workflow Analysis & Consulting",
         title: "Workflow Analysis & Consulting",
-        body: "We study how your teams work today, identify where time and accuracy are being lost, and define the opportunities where custom software or AI can create real impact.",
+        body: "We examine your processes, identify bottlenecks and define where technology can make a practical difference.",
         points: [
           "Workflow & process assessment",
           "Operational bottleneck analysis",
@@ -131,11 +133,11 @@ export const homeContent = {
         id: "custom",
         label: "Custom AI Development",
         title: "Custom AI Development",
-        body: "Every solution is built specifically for your business, not adapted from a generic product.",
+        body: "We build AI systems for specific construction and façade workflows.",
         points: [
+          "AI-assisted workflows",
           "Drawing & document intelligence",
-          "Workflow automation",
-          "AI assistants & copilots",
+          "Drawing analysis & Data Extraction",
           "Computer vision & data extraction",
         ],
       },
@@ -143,23 +145,23 @@ export const homeContent = {
         id: "integration",
         label: "Integration Services",
         title: "Integration Services",
-        body: "New systems should work with the tools you already rely on. We integrate systems with your existing systems to make a digital environment.",
+        body: "We connect your tools and data to reduce manual work and disconnected information.",
         points: [
-          "API integrations",
-          "BIM & drawing workflows",
-          "ERP / CRM connectivity",
+          "Integration with existing tools",
           "Data synchronization",
+          "ERP / CRM connectivity",
+          "Connected Workflows"
         ],
       },
       {
         id: "training",
         label: "Training & Implementation",
         title: "Training & Implementation",
-        body: "We support your team through onboarding, training, rollout, and continuous improvements to ensure every solution becomes part of your daily operations.",
+        body: "We help your team adopt new systems and use them effectively in daily work.",
         points: [
-          "Team onboarding",
+          "Workflow setup",
           "Implementation planning",
-          "User training",
+          "Team training",
           "Ongoing support",
         ],
       },
@@ -174,45 +176,30 @@ export const homeContent = {
     viewAll: { label: "View All Solutions", href: "/solutions" },
     cards: [
       {
-        badge: "Façade",
-        imageKey: "facade",
-        title: "Façade Intelligence",
-        description: "Realize new ideas and opportunities without the hassle.",
-        href: "/case-studies/facade",
+        badge: "Quotation",
+        imageKey: "quoteGen",
+        title: "Quote Automation",
+        description: "Analyze your project drawings and documents to extract quantities and generate accurate quotes faster.",
+        href: "/solutions/quote-automation",
         cta: "View Solution",
       },
       {
-        badge: "Onboarding",
-        imageKey: "glass",
-        title: "Project Onboarding",
-        description: "Qualify equipment with far fewer interactions.",
+        badge: "DWG Viewer",
+        imageKey: "flatforge",
+        title: "FlatForge AI",
+        description: "latForge AI converts 2D aluminium panel drawings into 3D views and automates bending calculations.",
         href: "/case-studies/construction",
         cta: "View Solution",
       },
-      {
-        badge: "Delivery",
-        imageKey: "aluminium",
-        title: "Materials Delivery",
-        description: "Receive the right materials on site without drama.",
-        href: "/solutions",
-        cta: "View Solution",
-      },
-      {
-        badge: "Deployment",
-        imageKey: "exterior",
-        title: "Commissioning Platform",
-        description: "Commission with curated context, not backtracking.",
-        href: "/portfolio",
-        cta: "View Solution",
-      },
+      
     ],
   },
   framework: {
     badge: "Our AI Transformation Framework",
-    titleBefore: "From discovery to ",
-    titleHighlight: "continuous optimization",
+    titleBefore: "We Start With Your Workflow ",
+    titleHighlight: " — Not the Technology",
     titleAfter: "",
-    body: "We guide you through every step of your AI transformation journey—from understanding your workflows to building, integrating, and improving intelligent systems.",
+    body: "Before recommending AI or software, we understand how your team actually works. Then we identify where technology can create the most impact.",
     callout: "A proven approach that delivers real business impact with AI.",
     steps: [
       {

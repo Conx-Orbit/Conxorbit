@@ -13,10 +13,13 @@ export default function FacadeAIWorkflow({ content }) {
     const root = timelineRef.current;
     if (!root || !steps.length) return undefined;
 
-    const segments = root.querySelectorAll(`.${styles.segment}`);
-    const nodes = root.querySelectorAll(`.${styles.node}`);
-    const stepEls = root.querySelectorAll(`.${styles.step}`);
-    const endArrow = root.querySelector(`.${styles.endArrow}`);
+    // CSS module names can contain characters such as "+" that have special
+    // meaning in CSS selectors. Class-name lookup avoids parsing the generated
+    // name as a selector.
+    const segments = Array.from(root.getElementsByClassName(styles.segment));
+    const nodes = Array.from(root.getElementsByClassName(styles.node));
+    const stepEls = Array.from(root.getElementsByClassName(styles.step));
+    const endArrow = root.getElementsByClassName(styles.endArrow)[0] || null;
 
     if (reduced) {
       segments.forEach((el) => el.classList.add(styles.segmentDrawn));

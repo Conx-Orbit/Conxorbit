@@ -234,6 +234,35 @@
   font-size: 0.9rem;
 }
 
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1300;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.alertModal {
+  width: min(100%, 420px);
+  padding: 24px;
+  border: 1px solid rgba(232, 160, 144, 0.5);
+  border-radius: 12px;
+  background: #20231d;
+  color: #f7f7f4;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+}
+
+.alertModal h2 {
+  margin: 0 0 10px;
+  color: #e8a090;
+}
+
+.alertModal p {
+  margin: 0 0 20px;
+}
+
 .mediaRow {
   display: flex;
   flex-wrap: wrap;

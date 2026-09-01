@@ -14,6 +14,10 @@ const CATEGORIES = [
   "other",
 ];
 
+const MAX_DEMO_VIDEO_SIZE = 100 * 1024 * 1024;
+const DEMO_VIDEO_TOO_LARGE_MESSAGE =
+  "File too large: Demo videos must be 100 MB or smaller.";
+
 const TRADES = [
   { value: "facade", label: "Facade" },
   { value: "construction", label: "Construction" },
@@ -117,6 +121,22 @@ const listToText = (value) =>
 const cloneEmpty = () => JSON.parse(JSON.stringify(EMPTY));
 
 
+const toSolutionFormData = (payload, mockupFile) => {
+  const data = new FormData();
+
+  Object.entries(payload).forEach(([key, value]) => {
+    if (value !== null && typeof value === "object") {
+      data.append(key, JSON.stringify(value));
+    } else {
+      data.append(key, String(value ?? ""));
+    }
+  });
+
+  if (mockupFile) data.append("mockup", mockupFile);
+  return data;
+};
+
+
 const mergeSolution = (item) => {
   const empty = cloneEmpty();
 
@@ -201,8 +221,10 @@ export default function Solution() {
 
   const [form, setForm] = useState(cloneEmpty());
   const [tagsText, setTagsText] = useState("");
-  const [uploadingMockup, setUploadingMockup] = useState(false);
+  const [mockupFile, setMockupFile] = useState(null);
+  const [mockupPreviewUrl, setMockupPreviewUrl] = useState("");
   const [uploadingDemo, setUploadingDemo] = useState(false);
+  const [uploadPopup, setUploadPopup] = useState("");
 
   const [allSolutions, setAllSolutions] = useState([]);
 
@@ -304,6 +326,11 @@ export default function Solution() {
   const onSave = async (event) => {
     event.preventDefault();
 
+    if (uploadingDemo) {
+      setError("Please wait for the media upload to finish before saving.");
+      return;
+    }
+
     setSaving(true);
     setError("");
     setNotice("");
@@ -323,21 +350,31 @@ export default function Solution() {
       delete payload.createdAt;
       delete payload.updatedAt;
 
+      const requestPayload = mockupFile
+        ? toSolutionFormData(payload, mockupFile)
+        : payload;
+
       if (isNew) {
         await api.admin.solutions.create(
           token,
-          payload
+          requestPayload
         );
         setNotice("Solution created successfully.");
         window.setTimeout(() => {
           navigate("/admin/solutions");
         }, 900);
       } else {
-        await api.admin.solutions.update(
+        const updated = await api.admin.solutions.update(
           token,
           id,
-          payload
+          requestPayload
         );
+        setForm(mergeSolution(updated));
+        setTagsText(listToText(updated?.tags));
+        if (mockupPreviewUrl) URL.revokeObjectURL(mockupPreviewUrl);
+        setMockupFile(null);
+        setMockupPreviewUrl("");
+        setNotice("Solution updated successfully.");
       }
     } catch (err) {
       setError(err.message || "Failed to save solution");
@@ -560,25 +597,15 @@ export default function Solution() {
   };
 
 
-  const onUploadMockup = async (event) => {
+  const onUploadMockup = (event) => {
     const file = event.target.files?.[0];
     if (!file) return;
 
-    setUploadingMockup(true);
     setError("");
-
-    try {
-      const uploaded = await api.admin.uploadImage(token, file, "conx-orbit/solutions");
-      setNestedField("hero", "mockup", {
-        url: uploaded?.url || uploaded?.media?.url || "",
-        publicId: uploaded?.publicId || uploaded?.media?.publicId || "",
-      });
-    } catch (err) {
-      setError(err.message || "Failed to upload hero mockup");
-    } finally {
-      setUploadingMockup(false);
-      event.target.value = "";
-    }
+    if (mockupPreviewUrl) URL.revokeObjectURL(mockupPreviewUrl);
+    setMockupFile(file);
+    setMockupPreviewUrl(URL.createObjectURL(file));
+    setNotice("New mockup selected. Save the solution to upload and apply it.");
   };
 
 
@@ -586,8 +613,16 @@ export default function Solution() {
     const file = event.target.files?.[0];
     if (!file) return;
 
+    if (file.size > MAX_DEMO_VIDEO_SIZE) {
+      setError("");
+      setUploadPopup(DEMO_VIDEO_TOO_LARGE_MESSAGE);
+      event.target.value = "";
+      return;
+    }
+
     setUploadingDemo(true);
     setError("");
+    setUploadPopup("");
 
     try {
       const uploaded = await api.admin.uploadVideo(token, file, "conx-orbit/solutions");
@@ -596,7 +631,16 @@ export default function Solution() {
         publicId: uploaded?.publicId || uploaded?.media?.publicId || "",
       });
     } catch (err) {
-      setError(err.message || "Failed to upload demo video");
+      const isTooLarge =
+        err.status === 413 ||
+        err.data?.code === "LIMIT_FILE_SIZE" ||
+        /file too large|limit_file_size|payload too large/i.test(err.message || "");
+
+      if (isTooLarge) {
+        setUploadPopup(DEMO_VIDEO_TOO_LARGE_MESSAGE);
+      } else {
+        setError(err.message || "Failed to upload demo video");
+      }
     } finally {
       setUploadingDemo(false);
       event.target.value = "";
@@ -635,7 +679,7 @@ export default function Solution() {
           <button
             className={styles.btn}
             type="submit"
-            disabled={saving}
+            disabled={saving || uploadingDemo}
           >
             {saving
               ? "Saving…"
@@ -656,6 +700,28 @@ export default function Solution() {
       {notice ? (
         <div className={styles.noticeToast} role="status" aria-live="polite">
           {notice}
+        </div>
+      ) : null}
+
+      {uploadPopup ? (
+        <div className={styles.modalBackdrop} role="presentation">
+          <div
+            className={styles.alertModal}
+            role="alertdialog"
+            aria-modal="true"
+            aria-labelledby="upload-error-title"
+          >
+            <h2 id="upload-error-title">File too large</h2>
+            <p>{uploadPopup}</p>
+            <button
+              className={styles.btn}
+              type="button"
+              autoFocus
+              onClick={() => setUploadPopup("")}
+            >
+              OK
+            </button>
+          </div>
         </div>
       ) : null}
 
@@ -887,10 +953,12 @@ export default function Solution() {
               type="file"
               accept="image/*"
               onChange={onUploadMockup}
-              disabled={uploadingMockup}
+              disabled={saving}
             />
           </label>
-          {uploadingMockup ? <p className={styles.muted}>Uploading image...</p> : null}
+          {mockupFile ? (
+            <p className={styles.muted}>New image ready to upload when you save.</p>
+          ) : null}
 
           <div className={styles.grid2}>
             <label className={styles.field}>
@@ -920,9 +988,9 @@ export default function Solution() {
             </label>
           </div>
 
-          {form.hero.mockup.url ? (
+          {mockupPreviewUrl || form.hero.mockup.url ? (
             <img
-              src={form.hero.mockup.url}
+              src={mockupPreviewUrl || form.hero.mockup.url}
               alt="Hero mockup"
               className={styles.mediaPreview}
               style={{ maxWidth: "500px", maxHeight: "280px", objectFit: "contain" }}
@@ -1949,7 +2017,7 @@ export default function Solution() {
           <button
             className={styles.btn}
             type="submit"
-            disabled={saving}
+            disabled={saving || uploadingDemo}
           >
             {saving
               ? "Saving…"

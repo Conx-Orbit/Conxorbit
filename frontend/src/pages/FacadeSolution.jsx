@@ -60,7 +60,7 @@ export default function FacadeSolution() {
 
   return (
     <PageShell atmosphere="facade">
-      <SEO title={meta.title} description={meta.description} path="/case-studies/facade" />
+      <SEO title={meta.title} description={meta.description} path="/trades/facade" />
       <FacadeTradeHero content={hero} />
       <FacadeWorkflow content={workflow} />
       <FacadeComplexity content={complexity} />

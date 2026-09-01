@@ -1,11 +1,10 @@
 import {
-  serviceFeaturedImages,
   serviceCapabilityImages,
 } from "../assets/services";
 
 const sharedApproach = {
   badge: "Our Approach",
-  title: "Every AI System Starts with Understanding Your Workflow",
+  title: "From Workflow Understanding to Working System",
   steps: [
     {
       icon: "understand",
@@ -77,7 +76,6 @@ const sharedFeatured = {
   cards: [
     {
       badge: "Façade",
-      image: serviceFeaturedImages.panelX,
       title: "Panel X",
       description:
         "Panel lifecycle visibility across shop, logistics, and site—so everyone works from one agreed status.",
@@ -86,7 +84,6 @@ const sharedFeatured = {
     },
     {
       badge: "Fabrication",
-      image: serviceFeaturedImages.flatforge,
       title: "Flatforge",
       description:
         "Production and flat-pattern workflows that keep fabrication moving without spreadsheet chase.",
@@ -104,12 +101,216 @@ const sharedCta = {
   secondary: { label: "Explore Solutions", href: "/solutions" },
 };
 
+export const serviceFaq = {
+  badge: "SERVICE FAQ",
+  titleBefore: "Questions About Working ",
+  titleHighlight: "With Us",
+  titleAfter: ".",
+  items: [
+    {
+      question: "Do you adapt the service to our existing workflow?",
+      answer:
+        "Yes. We begin by understanding how your team currently works, then shape the scope, technology, and delivery plan around that workflow.",
+    },
+    {
+      question: "Do you only develop AI for façade companies?",
+      answer:
+        "Façade and curtain-wall workflows are our strongest specialization, but we also work with construction companies, fabricators, consultants, developers, and other specialist trades.",
+    },
+    {
+      question: "How do you determine whether AI is suitable for our workflow?",
+      answer:
+        "We first examine the problem, available data, required accuracy, existing systems, and how the output will be used. If AI is not the most appropriate solution, we may recommend automation, integration, or conventional software instead.",
+    },
+    {
+      question: "Can we start with a smaller proof of concept?",
+      answer:
+        "Yes. A focused prototype or pilot is often the best way to validate the workflow, test real project data, and reduce risk before a wider rollout.",
+    },
+    {
+      question: "Can the AI integrate with our current systems?",
+      answer:
+        "Where suitable access is available, we can connect the solution with existing platforms, databases, document repositories, and internal tools through APIs or purpose-built integrations.",
+    },
+  ],
+};
+
+const customAiFaq = {
+  badge: "FAQ",
+  titleBefore: "Questions About ",
+  titleHighlight: "Custom AI Development",
+  titleAfter: ".",
+  items: [
+    {
+      question: "Do you only develop AI for façade companies?",
+      answer:
+        "Façade and curtain-wall workflows are our strongest specialization, but we also work with construction companies, fabricators, consultants, developers, and other specialist trades.",
+    },
+    {
+      question: "How do you determine whether AI is suitable for our workflow?",
+      answer:
+        "We first examine the problem, available data, required accuracy, existing systems, and how the output will be used. If AI is not the most appropriate solution, we may recommend automation, integration, or conventional software instead.",
+    },
+    {
+      question: "Can you work with our existing drawings and project documents?",
+      answer:
+        "Yes. Depending on the use case, the system may work with technical drawings, specifications, BOQs, schedules, inspection reports, images, spreadsheets, and other project records. Suitability is assessed during the initial analysis.",
+    },
+    {
+      question: "Can the AI integrate with our current systems?",
+      answer:
+        "Where suitable access is available, we can connect the solution with existing platforms, databases, document repositories, and internal tools through APIs or purpose-built integrations.",
+    },
+    {
+      question: "Do we need a large amount of data to begin?",
+      answer:
+        "Not always. The data requirement depends on the problem and the selected technical approach. Some systems can use existing AI models with controlled project knowledge, while others require labelled examples or historical records.",
+    },
+  ],
+};
+
+const workflowConsultingFaq = {
+  badge: "FAQ",
+  titleBefore: "Questions About ",
+  titleHighlight: "Workflow Analysis",
+  titleAfter: ".",
+  items: [
+    {
+      question: "What is workflow analysis?",
+      answer:
+        "Workflow analysis is a structured examination of how a process currently operates—including its tasks, people, documents, systems, decisions, and handovers. Its purpose is to identify friction and define practical improvements.",
+    },
+    {
+      question: "How is this different from general business consulting?",
+      answer:
+        "Our work focuses on operational and information-heavy workflows that may benefit from AI, automation, integration, or custom software. We connect process analysis directly with technical feasibility.",
+    },
+    {
+      question: "What types of workflows can you analyse?",
+      answer:
+        "We can assess workflows such as quotation preparation, drawing review, revision management, BOQ extraction, document control, fabrication tracking, inspections, reporting, approvals, and project-information retrieval.",
+    },
+    {
+      question: "Do you only work with façade companies?",
+      answer:
+        "Façade and curtain-wall workflows are our strongest specialization, but the service is also suitable for construction companies, manufacturers, engineering consultants, project teams, and other specialist trades.",
+    },
+    {
+      question: "Do we need to know what technology we want?",
+      answer:
+        "No. You only need to explain the operational problem. Our role is to determine whether AI, automation, integration, custom software, or a process change is the most appropriate response."
+    },
+  ],
+};
+
+const integrationFaq = {
+  badge: "INTEGRATION FAQ",
+  titleBefore: "Questions About ",
+  titleHighlight: "System Integration",
+  titleAfter: ".",
+  items: [
+    {
+      question: "Which construction and business systems can you integrate?",
+      answer:
+        "We can work with ERP, CRM, BIM, document-management, field, reporting, and custom internal platforms where suitable APIs, database access, or supported exchange methods are available.",
+    },
+    {
+      question: "What if one of our systems does not have an API?",
+      answer:
+        "We assess supported exports, database access, file-based exchanges, and other safe options. If a reliable integration is not possible, we explain the constraint and recommend the most maintainable alternative.",
+    },
+    {
+      question: "How do you protect data during an integration?",
+      answer:
+        "We design around least-privilege access, secure authentication, controlled data flows, logging, and the security requirements of the connected platforms and your organization.",
+    },
+    {
+      question: "How are sync failures and duplicate records handled?",
+      answer:
+        "We define source-of-truth rules, validation, retry behavior, conflict handling, and monitoring so failures are visible and recoverable rather than silently corrupting project information.",
+    },
+    {
+      question: "Can integrations be introduced without disrupting live projects?",
+      answer:
+        "Yes. We plan testing, staged releases, data migration, and cutover around active operations, with rollback and support arrangements appropriate to the risk of the connected workflow.",
+    },
+  ],
+};
+
+const trainingImplementationFaq = {
+  badge: "FAQ",
+  titleBefore: "Questions About ",
+  titleHighlight: "Training & Rollout",
+  titleAfter: ".",
+  items: [
+    {
+      question: "Who is the training designed for?",
+      answer:
+        "Training is tailored by role, so estimators, engineers, project managers, fabrication teams, site teams, administrators, and leaders learn the workflows and responsibilities relevant to them.",
+    },
+    {
+      question: "Can training use our own projects and data?",
+      answer:
+        "Yes. Where practical, we use your drawings, documents, scenarios, and processes so users practise the tasks they will perform after go-live rather than generic demonstrations.",
+    },
+    {
+      question: "How do you roll out a system across multiple teams or locations?",
+      answer:
+        "We create a phased implementation plan covering access, champions, training groups, pilot projects, communications, support, and success measures for each team or location.",
+    },
+    {
+      question: "What support is available after launch?",
+      answer:
+        "We can provide go-live hypercare, user support, refresher sessions, issue triage, adoption reviews, and ongoing improvements based on real usage and feedback.",
+    },
+    {
+      question: "How do you measure whether adoption is successful?",
+      answer:
+        "We agree practical indicators such as active usage, completion of key workflows, support demand, data quality, time saved, and user feedback, then use them to target further coaching or changes.",
+    },
+  ],
+};
+
+const constructionWebsiteFaq = {
+  badge: "WEBSITE DEVELOPMENT FAQ",
+  titleBefore: "Questions About ",
+  titleHighlight: "Construction Websites",
+  titleAfter: ".",
+  items: [
+    {
+      question: "Do you only build websites for construction companies?",
+      answer:
+        "Construction and facade businesses are our core focus, including contractors, fabricators, consultants, suppliers, and specialist trades. That focus helps us communicate technical capability clearly to industry buyers.",
+    },
+    {
+      question: "Can our team update the website after launch?",
+      answer:
+        "Yes. We can provide a practical content-management setup and training so your team can update projects, services, news, and other agreed content without relying on a developer for routine changes.",
+    },
+    {
+      question: "Can you help organize our services and project content?",
+      answer:
+        "Yes. We help shape the site structure, messaging, and content requirements so visitors can quickly understand what you do, where you work, and why they should trust your team.",
+    },
+    {
+      question: "Will the website support SEO, analytics, and lead capture?",
+      answer:
+        "Yes. Depending on scope, we can include technical SEO foundations, analytics, inquiry forms, CRM or email connections, and clear conversion paths for prospective clients and partners.",
+    },
+    {
+      question: "What happens after the website goes live?",
+      answer:
+        "We support launch, handover, and team training, and can provide an ongoing arrangement for maintenance, performance checks, content enhancements, and new functionality as the site grows.",
+    },
+  ],
+};
+
 const customAiCapabilities = [
   {
     icon: "blueprint",
     image: serviceCapabilityImages.drawing,
     title: "Drawing Intelligence",
-    body: "Interpret, compare, and extract valuable information from technical drawings to reduce manual review and improve engineering accuracy.",
+    body: "Extract dimensions, annotations, schedules, quantities, and other structured information from technical drawings. ",
   },
   {
     icon: "docs",
@@ -120,39 +321,28 @@ const customAiCapabilities = [
   {
     icon: "workflow",
     image: serviceCapabilityImages.workflow,
-    title: "Workflow Automation",
-    body: "Replace repetitive manual processes with intelligent workflows that improve speed, consistency, and operational efficiency.",
+    title: "AI Quantity Takeoff",
+    body: "Support the extraction and organization of measurable items from drawings, schedules, and project documents. ",
   },
   {
     icon: "chat",
     image: serviceCapabilityImages.chat,
-    title: "Custom AI Assistants",
-    body: "Purpose-built AI assistants trained around your projects, documents, and internal knowledge—not generic chatbots.",
+    title: "Computer Vision",
+    body: "Analyse images and video for inspection, quality, safety, progress, and asset-monitoring use cases.",
   },
   {
     icon: "cubes",
     image: serviceCapabilityImages.cubes,
-    title: "System Integration",
-    body: "Connect new platforms with your existing software, drawings, databases, and business workflows.",
+    title: "Project Knowledge Systems",
+    body: "Create controlled AI assistants that help teams search and retrieve information from approved project sources.",
   },
   {
     icon: "dashboard",
     image: serviceCapabilityImages.dashboard,
-    title: "Construction Analytics",
-    body: "Turn operational data into dashboards and insights that support better planning, tracking, and decision-making.",
+    title: "Predictive & Decision Support",
+    body: "Use historical and operational data to surface patterns, risks, exceptions, and information requiring human attention.",
   },
-  {
-    icon: "vision",
-    image: serviceCapabilityImages.vision,
-    title: "Computer Vision",
-    body: "Analyze images, drawings, and site data using AI to automate inspections, detection, and visual analysis tasks.",
-  },
-  {
-    icon: "devices",
-    image: serviceCapabilityImages.platforms,
-    title: "Digital Platforms",
-    body: "Build scalable web and mobile platforms tailored to construction operations, collaboration, and long-term growth.",
-  },
+ 
 ];
 
 export const servicePages = {
@@ -164,59 +354,60 @@ export const servicePages = {
         "Custom AI systems for construction workflows—drawing intelligence, quotation automation, document analysis, and operational decision support.",
     },
     hero: {
-      badge: "OUR SERVICES",
-      titleBefore: "Custom ",
-      titleHighlight: "AI",
-      titleAfter: " Development",
-      body: "We design intelligent systems around your construction workflows—from drawing intelligence and quotation automation to document analysis and operational decision support.",
+      badge: "CUSTOM AI DEVELOPMENT",
+      titleBefore: "AI Systems Built Around ",
+      titleHighlight: "Real Construction ",
+      titleAfter: "Workflow",
+      body: "We design and develop custom AI systems for complex façade and construction workflows—from drawing and document intelligence to quotation, inspection, and project-data automation.",
       primaryCta: { label: "Book Consultation", href: "/book-discovery" },
-      secondaryCta: { label: "View Related Solutions", href: "/solutions" },
+      secondaryCta: { label: "View Solutions", href: "/solutions" },
     },
     value: {
       badge: "WHERE IT CREATES VALUE",
-      title: "Built Around Real Construction Workflows",
+      title: "Where Custom AI Creates Value",
       cards: [
         {
           icon: "compare",
-          title: "Drawing Comparison",
-          body: "Spot revision changes across drawing sets instantly, without a manual side-by-side review.",
+          title: "Drawing Review",
+          body: "Extract, compare, and interpret information from technical drawings, schedules, and revisions.",
         },
         {
           icon: "quote",
-          title: "Quotation Automation",
-          body: "Turn specs and drawings into structured quotes in a fraction of the usual estimating time.",
+          title: "Quotation Workflows",
+          body: "Support enquiry review, requirement extraction, scope identification, and quotation preparation.",
         },
         {
           icon: "boq",
-          title: "BOQ Extraction",
-          body: "Pull structured bill-of-quantities data straight from drawings and specifications.",
+          title: "Quantity & Cost Extraction",
+          body: "Identify quantities, materials, and cost-related data from drawings, BOQs, and enquiry documents.",
         },
         {
           icon: "docs",
-          title: "Document Intelligence",
-          body: "Search, summarize, and cross-reference thousands of project documents in seconds.",
+          title: "Document Processing",
+          body: "Turn specifications, reports, contracts, and project files into structured, searchable information.",
+        },
+        {
+          icon: "workflow",
+          title: "Project Knowledge",
+          body: "Help teams retrieve reliable information across drawings, specifications, reports, and historical records.",
         },
         {
           icon: "shield",
-          title: "Compliance Review",
-          body: "Flag gaps against code and spec requirements before they become site issues.",
-        },
-        {
-          icon: "site",
-          title: "Site Operations",
-          body: "Connect field progress and reporting back to the project record in real time.",
+          title: "Inspection & Monitoring",
+          body: "Apply computer vision to quality inspections, site observations, progress tracking, and safety workflows.",
         },
       ],
     },
     approach: sharedApproach,
     capabilities: {
       badge: "Capabilities",
-      title: "Engineering Intelligent Systems Around Your Operations.",
-      body: "Every capability we build is designed to solve a real operational challenge—from interpreting technical drawings and automating workflows to connecting data, documents, and teams through intelligent software.",
+      title: "Custom AI Capabilities for Construction",
+      body: "We combine AI, automation, and product engineering to build systems around the information and workflows that construction teams already rely on.",
       cards: customAiCapabilities,
     },
     featured: sharedFeatured,
     why: sharedWhy,
+    faq: customAiFaq,
     cta: sharedCta,
   },
 
@@ -228,47 +419,47 @@ export const servicePages = {
         "Map construction workflows, find bottlenecks, and define where custom software or AI creates real impact.",
     },
     hero: {
-      badge: "OUR SERVICES",
-      titleBefore: "Workflow Analysis & ",
-      titleHighlight: "Consulting",
+      badge: "WORKFLOW ANALYSIS & CONSULTING",
+      titleBefore: "Find Where Your Workflow Is  ",
+      titleHighlight: "Losing Time.",
       titleAfter: "",
-      body: "We study how your teams work today, identify where time and accuracy are being lost, and define the opportunities where custom software or AI can create real impact.",
-      primaryCta: { label: "Book Consultation", href: "/book-discovery" },
-      secondaryCta: { label: "View Related Solutions", href: "/solutions" },
+      body: "We examine how work moves across your people, documents, systems, and decisions—then define practical opportunities for AI, automation, integration, or process improvement.",
+      primaryCta: { label: "Explore Your Workflow", action: "open-workflow" },
+      secondaryCta: { label: "View Solutions", href: "/solutions" },
     },
     value: {
       badge: "WHERE IT CREATES VALUE",
-      title: "Clarity Before You Commit to Build",
+      title: "Where Workflow Analysis Creates Value",
       cards: [
         {
           icon: "compare",
-          title: "Process Mapping",
-          body: "See how work actually moves—from estimate to fabrication to site—without assuming a textbook process.",
+          title: "Repetitive Manual Work",
+          body: "Identify recurring tasks such as data entry, document checking, file preparation, and report creation that consume skilled time.",
         },
         {
           icon: "quote",
-          title: "Bottleneck Discovery",
-          body: "Pinpoint where hours disappear in revisions, handoffs, and re-entry across tools.",
+          title: "Disconnected Information",
+          body: "Find where project information is fragmented across emails, spreadsheets, drawings, and documents.",
         },
         {
           icon: "boq",
-          title: "Opportunity Scoring",
-          body: "Rank automation and AI opportunities by impact, readiness, and delivery risk.",
+          title: "Process Bottlenecks",
+          body: "Locate approvals, handovers, reviews, and decisions that repeatedly delay progress.",
         },
         {
           icon: "docs",
-          title: "Data Readiness",
-          body: "Understand what drawings, docs, and systems you already have—and what gaps block progress.",
+          title: "Inconsistent Outputs",
+          body: "Understand why quotations, reports, inspections, or project records vary between teams, projects, and working methods.",
         },
         {
           icon: "shield",
-          title: "Risk Framing",
-          body: "Surface change, adoption, and integration risks before a build starts.",
+          title: "Less Workflow Visibility",
+          body: "Reveal where management lacks a reliable view of progress and responsibilities.",
         },
         {
           icon: "site",
-          title: "Practical Roadmap",
-          body: "Leave with a sequenced plan your operations and leadership can agree on.",
+          title: "Unclear Technology Decisions",
+          body: "Determine whether a problem requires AI, automation, integration, custom software, or simply a better-defined process.",
         },
       ],
     },
@@ -278,61 +469,51 @@ export const servicePages = {
     },
     capabilities: {
       badge: "Capabilities",
-      title: "Advisory That Stays Close to How Work Gets Done.",
-      body: "Consulting is grounded in construction operations—so recommendations stay practical, sequenced, and ready for delivery.",
+      title: "What We Analyse and Define.",
+      body: "Our consulting connects operational understanding with technical judgment, helping construction teams move from a broad problem to a clearly defined improvement plan.",
       cards: [
         {
           icon: "workflow",
           image: serviceCapabilityImages.bProcess,
-          title: "Workflow Assessment",
-          body: "End-to-end reviews of estimating, engineering, fabrication, and site reporting flows.",
+          title: "Workflow Mapping",
+          body: "Visualise how work moves between people, departments, documents, and systems.",
         },
         {
           icon: "dashboard",
           image: serviceCapabilityImages.bBottleneck,
           title: "Bottleneck Analysis",
-          body: "Quantify where delays and rework concentrate so investment decisions are evidence-led.",
+          body: "Identify the stages where work regularly slows down, returns for correction, or depends on manual coordination.",
         },
         {
           icon: "blueprint",
           image: serviceCapabilityImages.bMap,
-          title: "Automation Mapping",
-          body: "Identify tasks ripe for AI, software, or simple process change—without forcing tools.",
+          title: "Automation Opportunity Assessment",
+          body: "Identify repetitive, rule-based, and data-heavy activities that could be simplified or automated.",
         },
         {
           icon: "docs",
           image: serviceCapabilityImages.bWorkshop,
-          title: "Requirements Workshops",
-          body: "Translate operational pain into clear scopes your teams and vendors can execute.",
+          title: "AI Use-Case Assessment",
+          body: "Evaluate where AI can provide practical value, what data it would require, and where human review must remain part of the process.",
         },
         {
           icon: "cubes",
           image: serviceCapabilityImages.bSystems,
-          title: "Systems Landscape",
-          body: "Map ERP, BIM, CRM, and file stores so future builds plug into reality.",
+          title: "Systems & Integration Review",
+          body: "Assess how existing tools are used, where data is being re-entered, and which systems should exchange information.",
         },
         {
           icon: "chat",
           image: serviceCapabilityImages.bPeople,
-          title: "Stakeholder Alignment",
-          body: "Bring office, shop, and site voices into one shared definition of success.",
+          title: "Technology Roadmapping",
+          body: "Turn findings into a phased plan covering priorities, recommended solutions and dependencies. ",
         },
-        {
-          icon: "vision",
-          image: serviceCapabilityImages.bProof,
-          title: "Proof Priorities",
-          body: "Define what a prototype must prove before a larger build is funded.",
-        },
-        {
-          icon: "devices",
-          image: serviceCapabilityImages.bRoadmap,
-          title: "Delivery Roadmaps",
-          body: "Phased plans that balance quick wins with longer platform investments.",
-        },
+       
       ],
     },
     featured: sharedFeatured,
     why: sharedWhy,
+    faq: workflowConsultingFaq,
     cta: sharedCta,
   },
 
@@ -344,47 +525,47 @@ export const servicePages = {
         "Connect new platforms with ERP, BIM, drawings, and the tools construction teams already use.",
     },
     hero: {
-      badge: "OUR SERVICES",
-      titleBefore: "Integration ",
-      titleHighlight: "Services",
+      badge: "INTEGRATION SERVICES",
+      titleBefore: "Connect the Systems Your ",
+      titleHighlight: "Projects Depend On",
       titleAfter: "",
-      body: "New systems should work with the tools you already rely on. We connect platforms, drawings, databases, and business workflows into one coherent digital environment.",
+      body: "We connect software, project data, documents, and AI capabilities into coordinated workflows—reducing repeated data entry and helping information move reliably between teams and systems.",
       primaryCta: { label: "Book Consultation", href: "/book-discovery" },
-      secondaryCta: { label: "View Related Solutions", href: "/solutions" },
+      secondaryCta: { label: "View Solutions", href: "/solutions" },
     },
     value: {
       badge: "WHERE IT CREATES VALUE",
       title: "One Connected Operating Picture",
       cards: [
         {
-          icon: "compare",
-          title: "API Connectivity",
-          body: "Link custom apps and products to the systems your teams already live in.",
-        },
-        {
-          icon: "quote",
-          title: "BIM & Drawing Flows",
-          body: "Keep drawing packages and model data moving without manual file chasing.",
-        },
-        {
-          icon: "boq",
-          title: "ERP / CRM Sync",
-          body: "Push and pull commercial and project data without double entry.",
-        },
-        {
           icon: "docs",
-          title: "Document Bridges",
-          body: "Surface specs and correspondence where work happens—not buried in folders.",
+          title: "Repeated Data Entry",
+          body: "Reduce the need to enter the same project, material, quotation, inspection, or progress information. ",
         },
         {
-          icon: "shield",
-          title: "Reliable Hand-offs",
-          body: "Define ownership and retries so integrations fail safely, not silently.",
+          icon: "workflow",
+          title: "Disconnected Project Systems",
+          body: "Connect the platforms used for documents, project management, estimation, fabrication, and reporting.",
         },
         {
-          icon: "site",
-          title: "Field ↔ Office",
-          body: "Carry status and evidence between site tools and back-office systems in near real time.",
+          icon: "blueprint",
+          title: "Manual File Transfers",
+          body: "Automate the movement of approved files and structured data between software, databases, cloud storage, and internal systems.",
+        },
+        {
+          icon: "chat",
+          title: "Delayed Information Updates",
+          body: "Help relevant teams and systems receive current information when a record, document, status, or approval changes.",
+        },
+        {
+          icon: "dashboard",
+          title: "Fragmented Reporting",
+          body: "Bring information from multiple sources into a more consistent operational view without replacing every existing tool.",
+        },
+        {
+          icon: "cubes",
+          title: "Isolated AI Capabilities",
+          body: "Embed AI-based extraction, classification, comparison, or retrieval into the systems. ",
         },
       ],
     },
@@ -418,14 +599,14 @@ export const servicePages = {
         {
           icon: "workflow",
           image: serviceCapabilityImages.cSync,
-          title: "Data Synchronization",
-          body: "Scheduled and event-driven sync with clear conflict handling.",
+          title: "AI Workflow Integration",
+          body: "Embed document extraction, drawing intelligence, knowledge retrieval, and computer vision capabilities. ",
         },
         {
           icon: "docs",
           image: serviceCapabilityImages.cDocs,
-          title: "Document Routing",
-          body: "Automate where files land and who gets notified when versions change.",
+          title: "Data Transformation",
+          body: "Convert information between different schemas and file formats, before it reaches another system.",
         },
         {
           icon: "chat",
@@ -433,22 +614,12 @@ export const servicePages = {
           title: "Event & Notification Hooks",
           body: "Trigger the right alerts when status, drawings, or inspections change.",
         },
-        {
-          icon: "vision",
-          image: serviceCapabilityImages.cAccess,
-          title: "Identity & Access",
-          body: "Role-aware access so shop, site, and office see only what they need.",
-        },
-        {
-          icon: "devices",
-          image: serviceCapabilityImages.cMonitor,
-          title: "Monitoring & Support",
-          body: "Visibility into sync health so issues are caught before teams notice friction.",
-        },
+    
       ],
     },
     featured: sharedFeatured,
     why: sharedWhy,
+    faq: integrationFaq,
     cta: sharedCta,
   },
 
@@ -460,11 +631,11 @@ export const servicePages = {
         "Onboarding, training, and rollout support so new systems become part of daily construction operations.",
     },
     hero: {
-      badge: "OUR SERVICES",
-      titleBefore: "Training & ",
-      titleHighlight: "Implementation",
+      badge: "TRAINING & IMPLEMENTATION",
+      titleBefore: "Turn New Technology Into a",
+      titleHighlight: " Working Part of the Business",
       titleAfter: "",
-      body: "We support your team through onboarding, training, rollout, and continuous improvement so every solution becomes part of daily operations—not a shelfware launch.",
+      body: "We help construction and façade teams introduce new systems, train the people who use them, and establish the processes required for consistent day-to-day adoption.",
       primaryCta: { label: "Book Consultation", href: "/book-discovery" },
       secondaryCta: { label: "View Related Solutions", href: "/solutions" },
     },
@@ -473,34 +644,34 @@ export const servicePages = {
       title: "Adoption That Survives Real Project Pressure",
       cards: [
         {
-          icon: "compare",
-          title: "Role-Based Onboarding",
-          body: "Train estimators, engineers, shop leads, and site teams on the workflows they actually own.",
+          icon: "launch",
+          title: "New System Introduction",
+          body: "Prepare teams to adopt a newly developed AI system, platform, integration, or automated workflow.",
         },
         {
-          icon: "quote",
-          title: "Rollout Planning",
-          body: "Phase go-lives around live projects so change does not stall delivery.",
+          icon: "standardize",
+          title: "Inconsistent Ways of Working",
+          body: "Establish a shared process so different users and departments operate the system consistently.",
         },
         {
-          icon: "boq",
-          title: "Hands-On Workshops",
-          body: "Practice on your drawings and data—not generic demo content.",
+          icon: "adoption",
+          title: "Low Technology Adoption",
+          body: "Identify practical barriers that prevent teams from using a new tool as intended.",
         },
         {
-          icon: "docs",
-          title: "Playbooks & Guides",
-          body: "Leave teams with clear SOPs they can follow when the trainers leave.",
+          icon: "roles",
+          title: "Unclear Roles & Responsibilities",
+          body: "Define who enters information, reviews outputs, resolves exceptions, and maintains the workflow.",
         },
         {
-          icon: "shield",
-          title: "Hypercare Support",
-          body: "Stay close through the first live cycles to catch friction early.",
+          icon: "validate",
+          title: "AI Output Validation ",
+          body: "Train users to interpret AI-generated results, check supporting evidence, and recognize when human review is required.",
         },
         {
-          icon: "site",
-          title: "Continuous Improvement",
-          body: "Capture feedback and refine the system as usage patterns emerge.",
+          icon: "transition",
+          title: "Operational Transition",
+          body: "Move from existing manual processes to a new workflow without losing critical information or operational control.",
         },
       ],
     },
@@ -516,14 +687,14 @@ export const servicePages = {
         {
           icon: "chat",
           image: serviceCapabilityImages.tOnboard,
-          title: "Team Onboarding",
-          body: "Structured kickoffs that set roles, access, and success measures early.",
+          title: "Implementation Planning",
+          body: "Define rollout stages, dependencies, risks, and the resources required for adoption.",
         },
         {
           icon: "workflow",
-          image: serviceCapabilityImages.tPlan,
-          title: "Implementation Planning",
-          body: "Sequenced cutovers that respect fabrication and site calendars.",
+          image: serviceCapabilityImages.tSupport,
+          title: "Workflow Configuration",
+          body: "Configure user roles, approval paths, templates, data structures, and system rules.",
         },
         {
           icon: "docs",
@@ -534,8 +705,8 @@ export const servicePages = {
         {
           icon: "devices",
           image: serviceCapabilityImages.tField,
-          title: "Field Enablement",
-          body: "Mobile and site workflows practiced before the first live inspection day.",
+          title: "AI Readiness & Responsible Use",
+          body: "Help teams understand AI capabilities, limitations, data requirements, validate responsbilities.",
         },
         {
           icon: "dashboard",
@@ -544,20 +715,8 @@ export const servicePages = {
           body: "See who is using the system—and where coaching is still needed.",
         },
         {
-          icon: "cubes",
-          image: serviceCapabilityImages.tHandover,
-          title: "Integration Handover",
-          body: "Walk ops through connected systems so ownership is clear after launch.",
-        },
-        {
-          icon: "vision",
-          image: serviceCapabilityImages.tComms,
-          title: "Change Communication",
-          body: "Simple messaging that explains why the change exists and how to get help.",
-        },
-        {
           icon: "blueprint",
-          image: serviceCapabilityImages.tSupport,
+          image: serviceCapabilityImages.suportT,
           title: "Ongoing Support",
           body: "A durable support path for questions, fixes, and small enhancements.",
         },
@@ -565,6 +724,7 @@ export const servicePages = {
     },
     featured: sharedFeatured,
     why: sharedWhy,
+    faq: trainingImplementationFaq,
     cta: sharedCta,
   },
 
@@ -576,22 +736,22 @@ export const servicePages = {
         "Marketing and product websites for construction and façade companies—fast, clear, and easy to update.",
     },
     hero: {
-      badge: "OUR SERVICES",
-      titleBefore: "Construction Website ",
-      titleHighlight: "Development",
+      badge: "CONSTRUCTION WEBSITE DEVELOPMENT",
+      titleBefore: "Digital Platforms Built for ",
+      titleHighlight: "How Your Business Operates",
       titleAfter: "",
-      body: "We design and build marketing and product sites that feel like your brand—fast, clear, and easy to update—so prospects and partners understand your capabilities without a sales call.",
+      body: "We design and develop professional websites and web platforms for façade contractors, manufacturers, consultants, and construction specialists—combining industry understanding with clear positioning and purposeful technology.",
       primaryCta: { label: "Book Consultation", href: "/book-discovery" },
       secondaryCta: { label: "View Related Solutions", href: "/solutions" },
     },
     value: {
       badge: "WHERE IT CREATES VALUE",
-      title: "A Site That Speaks Construction Fluently",
+      title: "Where a Better Website Creates Value",
       cards: [
         {
           icon: "compare",
-          title: "Capability Clarity",
-          body: "Present trades, markets, and delivery strength without generic agency fluff.",
+          title: "Unclear Market Positioning",
+          body: "Present your specialization, technical capabilities, and project experience with greater clarity.",
         },
         {
           icon: "quote",
@@ -659,28 +819,18 @@ export const servicePages = {
           title: "Inquiry Flows",
           body: "Contact and discovery forms wired to the inbox your founders actually check.",
         },
-        {
-          icon: "workflow",
-          image: serviceCapabilityImages.wDesign,
-          title: "Design Systems",
-          body: "Reusable components that keep brand consistent as pages grow.",
-        },
+
         {
           icon: "cubes",
           image: serviceCapabilityImages.wIntegrate,
           title: "Integrations",
           body: "Analytics, CRM, and calendar hooks without slowing the experience.",
         },
-        {
-          icon: "vision",
-          image: serviceCapabilityImages.wLaunch,
-          title: "Launch & Handover",
-          body: "Go-live support and training so your team owns the site confidently.",
-        },
       ],
     },
     featured: sharedFeatured,
     why: sharedWhy,
+    faq: constructionWebsiteFaq,
     cta: sharedCta,
   },
 };

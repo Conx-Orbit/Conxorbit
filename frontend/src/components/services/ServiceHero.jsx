@@ -3,7 +3,7 @@ import Reveal from "../common/Reveal";
 import SectionBadge from "../common/SectionBadge";
 import styles from "./ServiceHero.module.css";
 
-export default function ServiceHero({ content }) {
+export default function ServiceHero({ content, onPrimaryCta }) {
   const {
     badge,
     title,
@@ -40,7 +40,15 @@ export default function ServiceHero({ content }) {
         {body ? <p className={styles.body}>{body}</p> : null}
         <div className={styles.actions}>
           {primaryCta ? (
-            <Link className={`${styles.primary} btnMotion`} to={primaryCta.href}>
+            <Link
+              className={`${styles.primary} btnMotion`}
+              to={primaryCta.href || "."}
+              onClick={(event) => {
+                if (!onPrimaryCta) return;
+                event.preventDefault();
+                onPrimaryCta();
+              }}
+            >
               <span>{primaryCta.label}</span>
               <span aria-hidden="true">→</span>
             </Link>

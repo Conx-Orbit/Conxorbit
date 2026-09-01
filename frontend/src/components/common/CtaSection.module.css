@@ -87,6 +87,18 @@
   transform: translateY(-1px);
 }
 
+.secondary.warmGold {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: #0b1714;
+}
+
+.secondary.warmGold:hover {
+  border-color: var(--color-accent-bright);
+  background: var(--color-accent-bright);
+  color: #0b1714;
+}
+
 @media (max-width: 640px) {
   .actions {
     flex-direction: column;

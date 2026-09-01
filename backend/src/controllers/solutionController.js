@@ -29,6 +29,7 @@ function parseBody(raw = {}) {
     "hero",
     "snapshot",
     "challenge",
+    "capabilities",
     "howItWorks",
     "builtFor",
     "demo",

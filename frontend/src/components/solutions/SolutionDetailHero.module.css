@@ -120,6 +120,8 @@
 }
 
 .browser {
+  width: min(112%, 680px);
+  margin-left: auto;
   border-radius: 14px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -171,9 +173,7 @@
 }
 
 .viewport {
-  aspect-ratio: 16 / 10;
-  max-height: 480px;
-  padding: clamp(10px, 1.5vw, 16px);
+  padding: 6px;
   box-sizing: border-box;
   overflow: hidden;
   background: #0b1b17;
@@ -181,7 +181,8 @@
 
 .viewport img {
   width: 100%;
-  height: 100%;
+  height: auto;
+  max-height: 560px;
   object-fit: contain;
   object-position: center;
   display: block;
@@ -194,8 +195,11 @@
     padding-top: var(--hero-pad-top);
   }
 
-  .viewport {
-    max-height: 360px;
-    aspect-ratio: 16 / 11;
+  .browser {
+    width: 100%;
+  }
+
+  .viewport img {
+    max-height: none;
   }
 }

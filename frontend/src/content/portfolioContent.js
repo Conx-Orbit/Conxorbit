@@ -1,4 +1,3 @@
-import featuredPanelX from "../assets/portfolio/featured-panelx.png";
 
 export const portfolioContent = {
   meta: {
@@ -22,8 +21,6 @@ export const portfolioContent = {
     title: "Connecting Façade Operations From Shop to Site.",
     body: "",
     tags: [],
-    cta: { label: "Explore Case Study", href: "/portfolio" },
-    image: featuredPanelX,
   },
   proof: {
     badge: "AT A GLANCE",

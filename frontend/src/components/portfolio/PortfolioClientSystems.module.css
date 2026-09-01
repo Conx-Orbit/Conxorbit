@@ -35,7 +35,7 @@
   max-width: var(--max-width);
   margin: 0 auto;
   display: grid;
-  gap: clamp(36px, 5vw, 56px);
+  gap: clamp(64px, 8vw, 96px);
 }
 
 .row {
@@ -55,6 +55,8 @@
 
 .media {
   position: relative;
+  padding: clamp(8px, 1.2vw, 14px);
+  box-sizing: border-box;
   border-radius: 2px;
   overflow: hidden;
   border: 1px solid var(--border-olive-gold);
@@ -82,9 +84,10 @@
 .media img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
   display: block;
+  border-radius: 2px;
 }
 
 .copy {
@@ -200,5 +203,9 @@
 
   .header {
     margin-bottom: 40px;
+  }
+
+  .list {
+    gap: clamp(48px, 10vw, 72px);
   }
 }

@@ -10,8 +10,9 @@ import ServiceWhy from "../components/services/ServiceWhy";
 import ServiceFinalCta from "../components/services/ServiceFinalCta";
 import FeaturedSolutions from "../components/home/FeaturedSolutions/FeaturedSolutions";
 import FAQAccordion from "../components/home/FAQAccordion/FAQAccordion";
-import { getServicePage } from "../content/servicePages";
-import { homeContent } from "../content/siteContent";
+import WorkflowDiscoveryModal from "../components/home/WorkflowDiscoveryModal/WorkflowDiscoveryModal";
+import { getServicePage, serviceFaq } from "../content/servicePages";
+import { workflowDiscoveryContent } from "../content/workflowDiscoveryContent";
 import { api, mediaUrl } from "../api/client";
 import styles from "./ServiceDetail.module.css";
 
@@ -40,6 +41,7 @@ export default function ServiceDetail() {
   const { slug } = useParams();
   const page = getServicePage(slug);
   const [featuredCards, setFeaturedCards] = useState([]);
+  const [workflowOpen, setWorkflowOpen] = useState(false);
 
   useEffect(() => {
     if (!page?.slug) return undefined;
@@ -67,7 +69,7 @@ export default function ServiceDetail() {
     return <Navigate to="/services/custom-ai-development" replace />;
   }
 
-  const faq = page.faq || homeContent.faq;
+  const faq = page.faq || serviceFaq;
 
   return (
     <PageShell atmosphere="services">
@@ -77,7 +79,14 @@ export default function ServiceDetail() {
         path={`/services/${page.slug}`}
       />
       <div className={styles.page}>
-        <ServiceHero content={page.hero} />
+        <ServiceHero
+          content={page.hero}
+          onPrimaryCta={
+            page.hero.primaryCta?.action === "open-workflow"
+              ? () => setWorkflowOpen(true)
+              : undefined
+          }
+        />
         <ServiceValue content={page.value} />
         <ServiceApproach content={page.approach} />
         <ServiceCapabilities content={page.capabilities} />
@@ -88,6 +97,11 @@ export default function ServiceDetail() {
         <FAQAccordion content={faq} />
         <ServiceFinalCta content={page.cta} />
       </div>
+      <WorkflowDiscoveryModal
+        content={workflowDiscoveryContent}
+        open={workflowOpen}
+        onClose={() => setWorkflowOpen(false)}
+      />
     </PageShell>
   );
 }

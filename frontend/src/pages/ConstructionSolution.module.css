@@ -1,0 +1,47 @@
+.comingSoon {
+  min-height: max(70vh, 620px);
+  padding: var(--hero-pad-top) clamp(20px, 5vw, 72px) clamp(64px, 8vw, 100px);
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 16px;
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--color-accent-bright);
+  font-size: 0.75rem;
+  font-weight: 650;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.comingSoon h1 {
+  margin: 0;
+  color: var(--color-text);
+  font-size: clamp(3rem, 9vw, 7rem);
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+}
+
+.body {
+  max-width: 34rem;
+  margin: 4px 0 8px;
+  color: rgba(232, 237, 216, 0.7);
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  line-height: 1.65;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border-radius: 10px;
+  background: var(--cta-primary-bg);
+  color: var(--cta-primary-color);
+  font-size: 0.92rem;
+  font-weight: 650;
+  text-decoration: none;
+}

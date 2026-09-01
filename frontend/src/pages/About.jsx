@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import SEO from "../components/common/SEO";
 import { CTABand } from "../components/common/PageHero";
 import Reveal from "../components/common/Reveal";
@@ -332,12 +332,32 @@ function LinkedInIcon() {
 
 function TeamSection({ team }) {
   const { title, members = [] } = team;
+  const roleOf = (member) => `${member.role || ""} ${member.designation || ""}`.toLowerCase();
+  const memberTier = (member) => {
+    const role = roleOf(member);
+    if (/\bceo\b|chief executive officer/.test(role)) return "ceo";
+    if (/co[\s-]?founder|\bcto\b|chief technology officer/.test(role)) return "leadership";
+    return "team";
+  };
+  const memberGroups = [
+    { tier: "ceo", title: "Meet Founder" },
+    { tier: "leadership", title: "Meet Our Co-Founders" },
+    { tier: "team", title: "Meet Our Team" },
+  ].map((group) => ({
+    ...group,
+    members: members.filter((member) => memberTier(member) === group.tier),
+  }));
 
   return (
     <Reveal as="section" className={styles.founders} aria-label={title}>
-      <h2 className={styles.foundersTitle}>{title}</h2>
       <ul className={styles.founderGrid}>
-        {members.map((member) => {
+        {memberGroups.map((group) => group.members.length ? (
+          <Fragment key={group.tier}>
+            <li className={styles.teamGroupTitle}>
+              <h2 className={styles.foundersTitle}>{group.title}</h2>
+            </li>
+            {group.members.map((member) => {
+          const tier = group.tier;
           const linkedin =
             member.linkedin ||
             member.socialLinks?.find((link) => link.platform === "linkedin")?.url;
@@ -348,7 +368,10 @@ function TeamSection({ team }) {
                 : member.image
               : member.image?.url || "";
           return (
-          <li key={member.name} className={`${styles.founderCard} interactiveCard cardReveal`}>
+          <li
+            key={member._id || member.name}
+            className={`${styles.founderCard} ${styles[`${tier}Card`]} interactiveCard cardReveal`}
+          >
             <div className={styles.founderHit}>
               <div className={`${styles.portrait} mediaZoom`}>
                 {image ? (
@@ -381,6 +404,8 @@ function TeamSection({ team }) {
           </li>
           );
         })}
+          </Fragment>
+        ) : null)}
       </ul>
     </Reveal>
   );

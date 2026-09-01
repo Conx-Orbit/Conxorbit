@@ -57,7 +57,7 @@
   max-width: var(--max-width);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: minmax(200px, 0.85fr) minmax(280px, 1.2fr) minmax(200px, 0.85fr);
+  grid-template-columns: minmax(190px, 0.78fr) minmax(320px, 1.44fr) minmax(190px, 0.78fr);
   gap: clamp(18px, 3vw, 32px);
   align-items: center;
 }
@@ -135,8 +135,8 @@
 
 .deviceStage {
   position: relative;
-  width: min(100%, 460px);
-  min-height: 300px;
+  width: min(100%, 520px);
+  min-height: 455px;
   display: grid;
   place-items: center;
 }
@@ -162,7 +162,7 @@
 }
 
 .laptop {
-  width: 100%;
+  width: min(100%, 510px);
   display: grid;
   justify-items: center;
   grid-area: 1 / 1;
@@ -188,16 +188,30 @@
 }
 
 .phone {
-  width: min(46%, 168px);
+  width: min(54%, 220px);
   grid-area: 1 / 1;
 }
 
 .phoneBezel {
-  padding: 10px 8px;
-  border-radius: 22px;
+  position: relative;
+  padding: 14px 9px 10px;
+  border-radius: 30px;
   background: linear-gradient(160deg, #1a2420, #0a100e);
-  border: 1px solid rgba(184, 137, 61, 0.4);
+  border: 2px solid rgba(184, 137, 61, 0.4);
   box-shadow: 0 20px 44px rgba(0, 0, 0, 0.45);
+}
+
+.phoneBezel::before {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: 7px;
+  left: 50%;
+  width: 34%;
+  height: 6px;
+  border-radius: 999px;
+  background: #070c0a;
+  transform: translateX(-50%);
 }
 
 .screen {
@@ -208,7 +222,36 @@
 }
 
 .screenCompact {
-  border-radius: 14px;
+  aspect-ratio: 9 / 18.5;
+  border-radius: 22px;
+}
+
+.screenMedia {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  display: grid;
+  place-items: center;
+}
+
+.screenMedia.screenCompact {
+  aspect-ratio: 9 / 18.5;
+}
+
+.mockupImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.screenCompact .screenTop {
+  padding-top: 14px;
+}
+
+.screenCompact .screenBody {
+  gap: 14px;
+  padding: 14px;
 }
 
 .screenTop {
@@ -240,6 +283,15 @@
   padding: 12px;
 }
 
+.laptop .screenBody {
+  min-height: 280px;
+  grid-template-rows: 130px auto 1fr;
+}
+
+.laptop .screenHero {
+  height: 130px;
+}
+
 .screenHero {
   height: 88px;
   border-radius: 8px;
@@ -249,7 +301,11 @@
 }
 
 .screenCompact .screenHero {
-  height: 72px;
+  height: 120px;
+}
+
+.screenCompact .screenStats {
+  grid-template-columns: 1fr;
 }
 
 .screenStats {
@@ -337,6 +393,10 @@
   .header h2 {
     max-width: none;
   }
+
+  .deviceStage {
+    width: min(100%, 540px);
+  }
 }
 
 @media (max-width: 640px) {
@@ -345,7 +405,11 @@
   }
 
   .deviceStage {
-    min-height: 260px;
+    min-height: 430px;
+  }
+
+  .phone {
+    width: min(62%, 220px);
   }
 }
 

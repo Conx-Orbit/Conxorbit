@@ -43,86 +43,29 @@ const FEATURE_ICONS = {
   ),
 };
 
-function PanelMockup() {
-  const panels = [
-    { id: "CW-104", active: true },
-    { id: "CW-105", active: false },
-    { id: "IGU-28", active: false },
-    { id: "SP-02", active: false },
-    { id: "CW-108", active: false },
-  ];
-
+function PanelMockup({ imageSrc }) {
   return (
-    <div className={styles.mockup} aria-hidden="true">
-      <div className={styles.mockTop}>
-        <span>PanelX / Riverside Tower / Level 12</span>
-        <div className={styles.mockTopRight}>
-          <span className={styles.synced}>
-            <span className={styles.syncedDot} />
-            Synced
-          </span>
-          <span className={styles.mockIcon}>⌕</span>
-          <span className={styles.mockIcon}>☰</span>
+    <figure className={styles.laptop}>
+      <div className={styles.laptopLid}>
+        <span className={styles.camera} aria-hidden="true" />
+        <div className={styles.screen}>
+          {imageSrc ? (
+            <img src={imageSrc} alt="PanelX application dashboard" loading="lazy" />
+          ) : (
+            <span className={styles.screenPlaceholder}>Add the PanelX image URL</span>
+          )}
         </div>
       </div>
-
-      <div className={styles.mockBody}>
-        <aside className={styles.mockSide}>
-          <div className={styles.mockSearch}>Search panels...</div>
-          <p className={styles.mockSideLabel}>Panels — 128</p>
-          <ul>
-            {panels.map((p) => (
-              <li key={p.id} className={p.active ? styles.panelActive : undefined}>
-                <span className={styles.panelDot} />
-                {p.id}
-              </li>
-            ))}
-          </ul>
-        </aside>
-
-        <div className={styles.mockViewport}>
-          <div className={styles.mockTools}>
-            <span className={styles.toolActive}>↖</span>
-            <span>🏷</span>
-            <span>⧉</span>
-            <span>📷</span>
-          </div>
-          <div className={styles.mockGrid}>
-            {Array.from({ length: 48 }).map((_, i) => (
-              <span
-                key={i}
-                className={i === 19 ? styles.cellActive : undefined}
-              />
-            ))}
-          </div>
-          <div className={styles.measure}>
-            <span className={styles.measureLine} />
-            <span>1200 mm</span>
-          </div>
-          <div className={styles.detailCard}>
-            <strong>Panel CW-104</strong>
-            <p>
-              <span>Status</span> <em>In progress</em>
-            </p>
-            <p>
-              <span>Location</span> Level 12 — Grid C4
-            </p>
-            <p>
-              <span>Photos</span> 3 attached
-            </p>
-            <p>
-              <span>Report</span> Submitted
-            </p>
-          </div>
-        </div>
+      <div className={styles.laptopBase} aria-hidden="true">
+        <span className={styles.trackpad} />
       </div>
-    </div>
+    </figure>
   );
 }
 
 export default function FacadePanelX({ content }) {
   if (!content) return null;
-  const { eyebrow, title, body, features = [], cta } = content;
+  const { eyebrow, title, body, image, features = [], cta } = content;
 
   return (
     <Reveal as="section" className={styles.section} aria-label={eyebrow || title}>
@@ -139,7 +82,7 @@ export default function FacadePanelX({ content }) {
         </div>
 
         <div className={`${styles.mockWrap} cardReveal`}>
-          <PanelMockup />
+          <PanelMockup imageSrc={image} />
         </div>
 
         <ul className={styles.features}>

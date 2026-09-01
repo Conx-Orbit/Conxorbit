@@ -43,6 +43,42 @@ const ICONS = {
       <path d="M10 20v-5h4v5" stroke="currentColor" strokeWidth="1.5" />
     </svg>
   ),
+  launch: (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12 3v12M7.5 7.5L12 3l4.5 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M5 13v7h14v-7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
+  standardize: (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M8 6h12M8 12h12M8 18h12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M3.5 6l1 1 2-2M3.5 12l1 1 2-2M3.5 18l1 1 2-2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
+  adoption: (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M4 18V9M10 18v-6M16 18V6M22 18H2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M5 6.5l4-2 5 2 5-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
+  roles: (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <circle cx="8" cy="8" r="3" stroke="currentColor" strokeWidth="1.5" />
+      <circle cx="17" cy="9" r="2.5" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M3 20v-2a5 5 0 0110 0v2M14 20v-1.5a4 4 0 018 0V20" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  ),
+  validate: (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M15.5 15.5L21 21M7.5 10.5l2 2 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
+  transition: (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M4 7h13M14 4l3 3-3 3M20 17H7M10 14l-3 3 3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
 };
 
 export default function ServiceValue({ content }) {

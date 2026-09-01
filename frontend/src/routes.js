@@ -28,11 +28,11 @@ function DiscoveryRedirect() {
 }
 
 function FacadeRedirect() {
-  return <Navigate to="/case-studies/facade" replace />;
+  return <Navigate to="/trades/facade" replace />;
 }
 
 function ConstructionRedirect() {
-  return <Navigate to="/case-studies/construction" replace />;
+  return <Navigate to="/trades/construction" replace />;
 }
 
 export const routes = [
@@ -44,10 +44,12 @@ export const routes = [
   { path: "/services", element: ServicesRedirect },
   { path: "/services/:slug", element: ServiceDetail },
   { path: "/products", element: HomeRedirect },
+  { path: "/trades/facade", element: FacadeSolution },
+  { path: "/trades/construction", element: ConstructionSolution },
   { path: "/portfolio", element: Portfolio },
   { path: "/case-studies", element: CaseStudiesRedirect },
-  { path: "/case-studies/facade", element: FacadeSolution },
-  { path: "/case-studies/construction", element: ConstructionSolution },
+  { path: "/case-studies/facade", element: FacadeRedirect },
+  { path: "/case-studies/construction", element: ConstructionRedirect },
   { path: "/case-studies/:slug", element: CaseStudyDetail },
   { path: "/partners", element: HomeRedirect },
   { path: "/about", element: About },

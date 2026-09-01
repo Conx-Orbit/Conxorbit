@@ -1,6 +1,6 @@
-import panelXImage from "../assets/portfolio/featured-panelx.png";
-import inspectionImage from "../assets/solutions/construction-inspection.jpg";
-import drawingImage from "../assets/solutions/drawing-intelligence.jpg";
+import panelXImage from "../assets/images/panelx-Db.PNG";
+import quotation from "../assets/images/Quotation.png";
+import checkmateImage from "../assets/images/checkmate-mockup.png"
 
 export const glanceModalContent = {
   badge: "CONX ORBIT",
@@ -11,26 +11,26 @@ export const glanceModalContent = {
     {
       badge: "CLIENT SYSTEM",
       title: "PanelX",
-      body: "Façade panel visibility across shop and site.",
+      body: "A façade panel management system that connects panel data, production, and project tracking in one workflow.",
       href: "/solutions/panel-x",
       demoHref: "/solutions/panel-x#demo",
       image: panelXImage,
     },
     {
       badge: "INTERNAL PRODUCT",
-      title: "Construction Inspection",
-      body: "Site capture, photos, and close-out in one flow.",
-      href: "/solutions/construction-inspection",
-      demoHref: "/solutions/construction-inspection#demo",
-      image: inspectionImage,
+      title: "Checkmate",
+      body: "Site Inspection through voice interaction, attach site photos and generate report. ",
+      href: "/solutions/checkmate",
+      demoHref: "/solutions/checkmate#demo",
+      image: checkmateImage,
     },
     {
       badge: "WORKFLOW SOLUTION",
-      title: "Drawing Intelligence",
-      body: "Revision compare and drawing data extraction.",
-      href: "/solutions/drawing-intelligence",
-      demoHref: "/solutions/drawing-intelligence#demo",
-      image: drawingImage,
+      title: "Quotation Automation",
+      body: "An AI-assisted workflow that extracts project requirements and organizes quotation data from drawings and documents.",
+      href: "/solutions/quote-automation",
+      demoHref: "/solutions/quote-automation#demo",
+      image: quotation,
     },
   ],
   footerPrompt: "See what we're building.",

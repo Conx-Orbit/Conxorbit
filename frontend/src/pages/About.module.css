@@ -450,7 +450,7 @@
   text-align: center;
   font-size: var(--heading-size-h2);
   color: var(--forest);
-  margin-bottom: 48px;
+  margin: 0;
 }
 
 .founderGrid {
@@ -458,9 +458,18 @@
   max-width: min(920px, 100%);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 18px;
   align-items: start;
+}
+
+.teamGroupTitle {
+  grid-column: 1 / -1;
+  margin: 36px 0 30px;
+}
+
+.teamGroupTitle:first-child {
+  margin-top: 0;
 }
 
 .founderCard {
@@ -469,6 +478,28 @@
   max-width: 280px;
   width: 100%;
   margin-inline: auto;
+  grid-column: span 2;
+}
+
+.ceoCard {
+  grid-column: 1 / -1;
+  max-width: 420px;
+}
+
+.leadershipCard {
+  grid-column: span 3;
+}
+
+.ceoCard .portrait {
+  max-height: 350px;
+}
+
+.ceoCard .founderInfo {
+  padding: 20px 18px 22px;
+}
+
+.ceoCard .founderName {
+  font-size: clamp(1.3rem, 2vw, 1.6rem);
 }
 
 .founderHit {
@@ -727,6 +758,12 @@
   .founderGrid {
     grid-template-columns: 1fr;
     max-width: 420px;
+  }
+
+  .founderCard,
+  .ceoCard,
+  .leadershipCard {
+    grid-column: 1;
   }
 
   .offer {

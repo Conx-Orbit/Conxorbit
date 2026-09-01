@@ -50,9 +50,18 @@ export const api = {
   admin: {
     solutions: {
       list: (token) => request("/api/admin/solutions", { token }),
-      create: (token, body) => request("/api/admin/solutions", { method: "POST", token, body }),
+      create: (token, body) =>
+        request("/api/admin/solutions", {
+          method: "POST",
+          token,
+          ...(body instanceof FormData ? { formData: body } : { body }),
+        }),
       update: (token, id, body) =>
-        request(`/api/admin/solutions/${id}`, { method: "PUT", token, body }),
+        request(`/api/admin/solutions/${id}`, {
+          method: "PUT",
+          token,
+          ...(body instanceof FormData ? { formData: body } : { body }),
+        }),
       remove: (token, id) => request(`/api/admin/solutions/${id}`, { method: "DELETE", token }),
     },
     caseStudies: {

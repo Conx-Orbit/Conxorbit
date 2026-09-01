@@ -124,7 +124,11 @@ export default function SolutionDetail() {
               title: solution.cta.title,
               body: solution.cta.body,
               primary: { label: "Book a Discovery Call", href: "/book-discovery" },
-              secondary: { label: "Explore Solutions", href: "/solutions" },
+              secondary: {
+                label: "Explore Solutions",
+                href: "/solutions",
+                variant: "warmGold",
+              },
             }}
           />
         ) : null}

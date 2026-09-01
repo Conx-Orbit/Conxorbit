@@ -33,7 +33,22 @@ const ICONS = {
   ),
 };
 
-function DashboardScreen({ compact = false }) {
+function DashboardScreen({ compact = false, imageSrc = "" }) {
+  if (imageSrc) {
+    return (
+      <div
+        className={`${styles.screen} ${styles.screenMedia} ${compact ? styles.screenCompact : ""}`}
+      >
+        <img
+          className={styles.mockupImage}
+          src={imageSrc}
+          alt=""
+          loading="lazy"
+        />
+      </div>
+    );
+  }
+
   return (
     <div className={`${styles.screen} ${compact ? styles.screenCompact : ""}`}>
       <div className={styles.screenTop}>
@@ -72,6 +87,7 @@ export default function FeaturedCaseStudy({ content }) {
     titleAfter,
     body,
     mockupLabel,
+    mockupImages = {},
     cta,
     features = [],
   } = content;
@@ -127,7 +143,7 @@ export default function FeaturedCaseStudy({ content }) {
               aria-hidden={showMobile}
             >
               <div className={styles.laptopBezel}>
-                <DashboardScreen />
+                <DashboardScreen imageSrc={mockupImages.laptop} />
               </div>
               <div className={styles.laptopBase} />
             </div>
@@ -136,7 +152,7 @@ export default function FeaturedCaseStudy({ content }) {
               aria-hidden={!showMobile}
             >
               <div className={styles.phoneBezel}>
-                <DashboardScreen compact />
+                <DashboardScreen compact imageSrc={mockupImages.mobile} />
               </div>
             </div>
           </div>

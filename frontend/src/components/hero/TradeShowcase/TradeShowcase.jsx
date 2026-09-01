@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Reveal from "../../common/Reveal";
 import SectionBadge from "../../common/SectionBadge";
-
 import facade from "../../../assets/tradeCards/facade.jfif";
 import glass from "../../../assets/tradeCards/glass.jfif";
 import aluminium from "../../../assets/tradeCards/aluminium.jfif";

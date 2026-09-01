@@ -36,7 +36,7 @@ const ICONS = {
   ),
 };
 
-/** Why Choose AI — CSS sticky stacked cards (no GSAP pin). */
+/** challenges — CSS sticky stacked cards (no GSAP pin). */
 export default function Challenges({ content, onExplore, ctaLabel = "Explore your Workflow" }) {
   const {
     badge,

@@ -1,4 +1,6 @@
-import serviceImage from "../assets/images/services-image.png"
+import serviceImage from "../assets/images/services-image.png";
+import panlexmockup from "../assets/images/Panelx-mockup.PNG";
+import panelXMobile from "../assets/images/Panelx-mobile.png";
 
 export const site = {
   name: "ConX Orbit",
@@ -18,10 +20,10 @@ export const navLinks = [
   },
   {
     label: "Trades",
-    href: "/case-studies/facade",
+    href: "/trades/facade",
     children: [
-      { label: "Façade & Curtain Wall", href: "/case-studies/facade" },
-      { label: "Construction Technology", href: "/case-studies/construction" },
+      { label: "Façade & Curtain Wall", href: "/trades/facade" },
+      { label: "Construction Technology", href: "/trades/construction" },
     ],
   },
   {
@@ -63,7 +65,7 @@ export const homeContent = {
     statCards: [
       { label: "No generic software" },
       { label: "No forced workflows" },
-      { label: "We build around yours" },
+      { label: "We build around your workflow" },
     ],
   },
   tradeShowcase: {
@@ -187,8 +189,8 @@ export const homeContent = {
         badge: "DWG Viewer",
         imageKey: "flatforge",
         title: "FlatForge AI",
-        description: "latForge AI converts 2D aluminium panel drawings into 3D views and automates bending calculations.",
-        href: "/case-studies/construction",
+        description: "FlatForge AI converts 2D aluminium panel drawings into 3D views and automates bending calculations.",
+        href: "/solutions/flatforge-ai",
         cta: "View Solution",
       },
       
@@ -203,63 +205,63 @@ export const homeContent = {
     callout: "A proven approach that delivers real business impact with AI.",
     steps: [
       {
-        title: "Discover",
-        body: "We understand your business, challenges, goals and current workflows. This helps us identify where AI can create the most impact.",
+        title: "Understand",
+        body: "Map the current workflow.",
       },
       {
-        title: "Consult",
-        body: "We assess opportunities, analyze processes and define the right AI strategy aligned with your business objectives.",
+        title: "Find the Bottleneck",
+        body: "Identify where time, information, or accuracy is being lost.",
       },
       {
         title: "Design",
-        body: "We design the solution architecture, data approach and AI models that fit your workflow and technical environment.",
+        body: "Decide what should be automated and what should remain human.",
       },
       {
-        title: "Develop",
-        body: "Our team builds custom AI solutions using the latest technologies with quality, security and scalability in mind.",
+        title: "Build",
+        body: "Develop the system around your actual process.",
       },
       {
         title: "Integrate",
-        body: "We seamlessly integrate AI solutions with your existing systems, tools and data sources.",
+        body: "Connect it with the tools and data you already use.",
       },
       {
-        title: "Train",
-        body: "We empower your team with the knowledge and training they need to confidently use and adopt AI solutions.",
-      },
-      {
-        title: "Optimize",
-        body: "We continuously monitor, improve and optimize the solution to ensure long-term value and performance.",
+        title: "Improve",
+        body: "Refine it as your team uses it in real projects.",
       },
     ],
   },
   featuredCaseStudy: {
     badge: "FEATURED CASE STUDY",
-    titleBefore: "Connecting Façade Operations ",
-    titleHighlight: "From Shop to Site.",
+    titleBefore: "From DWG Drawings to  ",
+    titleHighlight: "On-Site Panel Tracking.",
     titleAfter: "",
-    body: "A custom platform that unifies drawings, panel status, site photos, and project documents—so façade teams work from one live source of truth.",
+    body: "A custom platform connecting drawings, panel information, site photos, installation progress, and project documents in one browser-based system.",
     mockupLabel: "A SINGLE SOURCE OF TRUTH",
-    cta: { label: "Explore the Case Study", href: "/case-studies/facade-panel-visibility" },
+    mockupImages: {
+      laptop: panlexmockup, // Add the desktop/web screenshot URL here
+      mobile: panelXMobile, // Add the mobile screenshot URL here
+    },
+    cta: { label: "Explore the Case Study", href: "/case-studies/panel-x-case-study" },
     features: [
       {
         icon: "drawing",
-        title: "Drawing Intelligence",
-        lines: ["326 Panels Indexed", "Latest Revision Synced"],
+        title: "Browser-Based DWG Viewing",
+        lines: ["Open and review façade DWG drawings directly in the browser. "],
       },
       {
         icon: "progress",
-        title: "Installation Progress",
-        lines: ["1,284 Panels Installed", "Live Status Tracking"],
+        title: "Centralized Project Information",
+        lines: ["Keep drawings, panel details, site images and project records connected at one place."],
       },
       {
         icon: "docs",
-        title: "Site Documentation",
-        lines: ["248 Photos Linked", "Field Reports Updated"],
+        title: "Project Status Tracking",
+        lines: ["Find specific panels quickly, attach site photos and update their installation status."],
       },
       {
         icon: "files",
-        title: "Project Documents",
-        lines: ["Drawings • RFIs • Reports", "Centralized Access"],
+        title: "Natural Language Panel Query",
+        lines: ["Ask the AI assistant about any panel and retrieve relevant information without manually searching."],
       },
     ],
   },
@@ -300,25 +302,35 @@ export const homeContent = {
     titleAfter: "",
     items: [
       {
-        question: "Do you only work with façade companies?",
+        question: "What does ConX Orbit build?",
         answer:
-          "Façade is our deepest specialty, but we also build for broader construction teams when custom software or AI removes real friction.",
+          "We build custom AI systems, workflow automations and software platforms around real façade and construction processes—from drawing intelligence and quotation workflows to document management, site reporting and fabrication tracking.",
       },
       {
-        question: "Do you sell off-the-shelf products?",
+        question: "Who do you work with?",
         answer:
-          "We build custom platforms and select product modules. If a spreadsheet is enough, we’ll say so — we don’t force a catalogue purchase.",
+          "We primarily work with façade contractors, curtain wall fabricators, aluminium manufacturers, building-envelope consultants and façade engineering teams. We also support construction companies, developers and other specialist trades.",
       },
       {
-        question: "How do projects usually start?",
+        question: "Do you provide ready-made products or custom solutions?",
         answer:
-          "With a consultation: map the bottleneck, agree what “done” looks like, then propose a practical path — custom build, AI, or both.",
+          "Our work is primarily client-specific. We study the existing workflow and build a solution around the team’s requirements. We also develop internal products and workflow demonstrators for selected industry problems.",
       },
       {
-        question: "Can you integrate with our existing tools?",
+        question: "How do you decide whether a workflow needs AI?",
         answer:
-          "Yes. We design around the systems you already use and connect them carefully rather than replacing everything at once.",
+          "We do not add AI simply because it is available. We first identify where time, accuracy or information is being lost, then determine whether AI, automation, integration or conventional software is the most appropriate solution.",
+
       },
+      {
+        question: "Can you integrate with our existing tools and systems?",
+        answer:"Yes. Where technically possible, we can connect new workflows with existing databases, document repositories, APIs and business systems—reducing the need to replace tools that already work."
+      },
+      {
+        question:"How does a project begin?",
+        answer:"It starts with a discovery call. We discuss the workflow, current tools, users, constraints and desired outcome. We then recommend the appropriate scope, technical approach and next steps."
+      }
+
     ],
   },
   testimonials: {
@@ -351,8 +363,8 @@ export const homeContent = {
     ],
   },
   closingCta: {
-    title: "Let's Talk About the Way Your Business Works.",
-    body: "Whether you're exploring automation, improving an existing workflow, or planning a new platform, we'll help you identify where technology can create the greatest operational impact.",
+    title: "Got a Workflow That Shouldn't Be This Manual?",
+    body: "Show us how your team handles it today. We'll identify where AI, automation, or custom software can actually make a difference.",
     primaryCta: { label: "Book a Discovery Call", href: "/book-discovery" },
     secondaryCta: { label: "View Portfolio", href: "/portfolio" },
   },
@@ -410,14 +422,15 @@ export const facadeContent = {
   },
   panelX: {
     eyebrow: "Featured Façade System",
-    title: "PanelX — A Digital Layer for Façade Operations.",
-    body: "PanelX brings drawings, panel information, documentation and field activity into one connected environment — giving façade teams a clearer view of what is happening across the project.",
+    title: "PanelX — From Façade Drawing to Panel Tracking.",
+    body: "PanelX connects façade drawings with structured panel records, production status, and project information—giving teams one place to locate panels, review details, and follow progress.",
+    image: panlexmockup, // Replace this with your PanelX screenshot URL.
     features: [
-      { icon: "dwg", title: "DWG Viewer", body: "View drawings in browser" },
-      { icon: "tracking", title: "Panel Tracking", body: "Search and track individual panels" },
-      { icon: "field", title: "Field Documentation", body: "Capture photos and reports" },
-      { icon: "info", title: "Project Information", body: "Connect documentation to panels" },
-      { icon: "measure", title: "Measurement", body: "Measure directly from drawings" },
+      { icon: "dwg", title: "DWG Viewer", body: "Review façade drawings directly within the platform." },
+      { icon: "tracking", title: "Panel Identification", body: "Locate individual panels and access their linked records." },
+      { icon: "field", title: "Panel Data", body: "Keep dimensions, references, and project details organized." },
+      { icon: "info", title: "Production Tracking", body: "Follow each panel through defined production stages." },
+      { icon: "measure", title: "Project Reportingt", body: "Turn current panel data into clearer progress views." },
     ],
     cta: { label: "Explore PanelX", href: "/solutions/panel-x" },
   },
@@ -639,12 +652,12 @@ export const footerContent = {
     {
       title: "Trades",
       links: [
-        { label: "Façade & Curtain Wall", href: "/case-studies/facade" },
-        { label: "Construction Technology", href: "/case-studies/construction" },
+        { label: "Façade & Curtain Wall", href: "/trades/facade" },
+        { label: "Construction Technology", href: "/trades/construction" },
         { label: "Aluminium", href: "/portfolio" },
         { label: "Exterior", href: "/portfolio" },
-        { label: "Site Operations", href: "/case-studies/construction" },
-        { label: "Engineering", href: "/case-studies/facade" },
+        { label: "Site Operations", href: "/trades/construction" },
+        { label: "Engineering", href: "/trades/facade" },
       ],
     },
     {

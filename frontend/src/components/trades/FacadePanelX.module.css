@@ -55,6 +55,81 @@
 
 .mockWrap {
   width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.laptop {
+  width: min(100%, 940px);
+  margin: 0;
+  display: grid;
+  justify-items: center;
+  filter: drop-shadow(0 28px 35px rgba(0, 0, 0, 0.42));
+}
+
+.laptopLid {
+  position: relative;
+  width: 92%;
+  padding: 16px 16px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 20px 20px 10px 10px;
+  background: linear-gradient(145deg, #303834, #101714 72%);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.65);
+}
+
+.camera {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(180, 205, 195, 0.45);
+  transform: translateX(-50%);
+}
+
+.screen {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  border-radius: 7px;
+  background: #07110f;
+}
+
+.screen img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.screenPlaceholder {
+  color: rgba(196, 208, 178, 0.5);
+  font-size: 0.9rem;
+}
+
+.laptopBase {
+  position: relative;
+  width: 100%;
+  height: clamp(18px, 3vw, 30px);
+  margin-top: -2px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 3px 3px 22px 22px;
+  background: linear-gradient(180deg, #4a534f, #1a211e 76%, #0d1210);
+  clip-path: polygon(4% 0, 96% 0, 100% 100%, 0 100%);
+}
+
+.trackpad {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 16%;
+  height: 5px;
+  border-radius: 0 0 6px 6px;
+  background: rgba(8, 14, 12, 0.62);
+  transform: translateX(-50%);
 }
 
 .mockup {

@@ -29,7 +29,12 @@ export default function CtaSection({
             </Link>
           ) : null}
           {secondary ? (
-            <Link className={`${styles.secondary} btnMotion`} to={secondary.href}>
+            <Link
+              className={`${styles.secondary}${
+                secondary.variant === "warmGold" ? ` ${styles.warmGold}` : ""
+              } btnMotion`}
+              to={secondary.href}
+            >
               <span>{secondary.label}</span>
             </Link>
           ) : null}

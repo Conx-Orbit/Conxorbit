@@ -8,15 +8,10 @@ MongoDB (Mongoose) + Express + Cloudinary for CMS media.
 cd backend
 npm install
 # Ensure MONGODB_URI + Cloudinary keys are in .env
-npm run seed
 npm run dev
 ```
 
 API: `http://localhost:5000`
-
-Admin login (after seed):
-- Email: `admin@conxorbit.com`
-- Password: `admin123`
 
 ## Environment
 
@@ -56,5 +51,4 @@ Local without SMTP/EmailJS: `CONTACT_MODE=log`
 
 ## Notes
 
-- Seed: `npm run seed` → `src/seed/seedMongo.js` (uploads real placeholder images from `frontend/src/assets/solutions`)
 - Health: `GET /api/health` includes Mongo connection status

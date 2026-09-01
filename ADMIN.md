@@ -6,7 +6,6 @@ Terminal 1 — API:
 ```bash
 cd backend
 npm install
-npm run seed
 npm start
 ```
 
@@ -18,17 +17,12 @@ npm start
 
 - Site: http://localhost:3000  
 - Admin: http://localhost:3000/admin/login  
-- Default admin: `admin@conxorbit.com` / `admin123`
 
 ## Data locations
 
 - **Primary database:** MongoDB (`MONGODB_URI` in `backend/.env`)
 - Solutions, case studies, team, offers, service featured config, admin login → Mongo
 - Static page copy (heroes, CTAs, service pages) → `frontend/src/content`
-
-Re-seed Mongo (wipes solutions / cases / team / offers / admin and reloads):  
-`cd backend && npm run seed`  
-(`seed` runs [`src/seed/seedMongo.js`](backend/src/seed/seedMongo.js) and uploads placeholder images to Cloudinary.)
 
 ## Images (Cloudinary)
 

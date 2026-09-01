@@ -234,6 +234,51 @@
   font-size: 0.9rem;
 }
 
+.passwordInput {
+  position: relative;
+  display: block;
+}
+
+.passwordInput input {
+  padding-right: 44px;
+}
+
+.passwordToggle {
+  position: absolute;
+  top: 50%;
+  right: 7px;
+  width: 34px;
+  height: 34px;
+  padding: 7px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: rgba(232, 237, 216, 0.62);
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.passwordToggle:hover,
+.passwordToggle:focus-visible {
+  background: rgba(255, 255, 255, 0.08);
+  color: #f7f7f4;
+  outline: none;
+}
+
+.passwordToggle:focus-visible {
+  box-shadow: 0 0 0 2px rgba(184, 137, 61, 0.7);
+}
+
+.passwordToggle svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 .modalBackdrop {
   position: fixed;
   inset: 0;

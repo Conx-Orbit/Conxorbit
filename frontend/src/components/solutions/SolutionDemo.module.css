@@ -18,20 +18,23 @@
 
 .frame {
   position: relative;
-  max-width: min(980px, var(--max-width));
+  /* --ratio is the media's width / height, set from its metadata in SolutionDemo.jsx.
+     Width is capped so tall (portrait / reel) videos never exceed ~78% of the viewport height. */
+  --ratio: 1.7778;
+  width: min(980px, var(--max-width), 100%, calc(min(78vh, 760px) * var(--ratio)));
   margin: 0 auto;
   border-radius: 22px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.1);
   background: rgba(5, 12, 11, 0.95);
-  aspect-ratio: 16 / 9;
+  aspect-ratio: var(--ratio);
 }
 
 .video,
 .poster {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
 }
 

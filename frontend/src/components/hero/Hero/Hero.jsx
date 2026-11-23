@@ -86,7 +86,7 @@ export default function Hero({ content }) {
             preload="metadata"
             poster="/videos/hero-poster.jpg"
           >
-            <source src="/videos/hero-bg.mp4" type="video/mp4" />
+            <source src="/videos/bg4.mp4" type="video/mp4" />
           </video>
         )}
         <div className={styles.overlay} />

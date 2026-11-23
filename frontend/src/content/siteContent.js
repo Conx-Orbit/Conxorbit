@@ -5,7 +5,7 @@ import panelXMobile from "../assets/images/Panelx-mobile.png";
 export const site = {
   name: "ConX Orbit",
   tagline: "Custom software and AI for construction and façade teams",
-  email: "Founder@conxorbit.com",
+  email: "founder@conxorbit.com",
   phone: "+92-303-7342110",
   whatsapp: "+92-303-7342110",
   whatsappLabel: "WhatsApp",
@@ -572,18 +572,18 @@ export const aboutContent = {
     pillars: [
       {
         graphic: "orbit",
-        title: "Delivering seamless experiences",
-        body: "Make it clear. We turn complex project workloads into software people actually use.",
+        title: "Understanding real workflows",
+        body: "We start with the challenges façade and construction teams face, building around how work actually gets done.",
       },
       {
         graphic: "rays",
-        title: "Orchestrating unified frameworks",
-        body: "Keep it simple. We own the path from workshop to production without typical handoff gaps.",
+        title: "Connecting fragmented processes",
+        body: "We bring people, project data and everyday tools together through intelligent, connected systems.",
       },
       {
         graphic: "flow",
-        title: "Compounding partnership gains",
-        body: "Do good work for people. We serve with care so every release impacts what matters on site.",
+        title: "Making technology practical",
+        body: "Every solution is designed to reduce friction, improve visibility and create measurable impact on real projects.",
       },
     ],
   },

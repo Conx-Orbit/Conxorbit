@@ -4,8 +4,8 @@ import checkmateImage from "../assets/images/checkmate-mockup.png"
 
 export const glanceModalContent = {
   badge: "CONX ORBIT",
-  title: "AI & Technology Built Around Real Workflows.",
-  body: "We build intelligent systems for façade and construction teams.",
+  title: "AI for Real Workflows.",
+  body: "Intelligent systems for façade and construction teams.",
   solutionsLabel: "FEATURED SOLUTIONS",
   solutions: [
     {
